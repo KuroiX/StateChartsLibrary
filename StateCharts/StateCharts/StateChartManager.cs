@@ -36,5 +36,14 @@ namespace StateCharts
                 UpdateConfiguration(i);
             }
         }
+
+        /// <summary>
+        /// Possible function for executing the behavior of the states the configuration is in at that moment in time
+        /// </summary>
+        /// <param name="config"></param>
+        public static void ExecuteBehavior(int config)
+        {
+            
+        }
     }
 }

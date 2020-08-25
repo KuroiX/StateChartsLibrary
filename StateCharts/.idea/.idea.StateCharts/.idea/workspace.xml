@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" afterDir="false" />
     </list>
@@ -41,10 +40,11 @@
         <option value="$PROJECT_DIR$/StateCharts/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
       </list>
     </option>
   </component>
@@ -71,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598378075620</updated>
-      <workItem from="1598378093793" duration="5657000" />
+      <workItem from="1598378093793" duration="7606000" />
     </task>
     <servers />
   </component>
