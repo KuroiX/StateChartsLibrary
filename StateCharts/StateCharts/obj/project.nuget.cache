@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "qEBl/HOKAe2Uw4Ru2us0LO3uzd/Cun85+4NmFe4fiqPywJMyYJUWm9PHrIYy61YsiYKLVPwGWfopo0Pd6bs1Dg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\KuroiX\\Desktop\\SS20\\Thesis\\StateChartsLibrary\\StateCharts\\StateCharts\\StateCharts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
