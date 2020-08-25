@@ -20,10 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/StateCharts/StateChartDiagram.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Class1.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +38,20 @@
         <option value="$PROJECT_DIR$/StateCharts/Class1.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartDiagram.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/AtomicState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1gbKuE9BBJHO4DmH3NP2oINHnIM" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -54,7 +61,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -64,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598378075620</updated>
-      <workItem from="1598378093793" duration="2774000" />
+      <workItem from="1598378093793" duration="5657000" />
     </task>
     <servers />
   </component>
@@ -86,5 +93,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="625" y="222" key="SettingsEditor" timestamp="1598382887916">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="625" y="222" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1598382887916" />
   </component>
 </project>

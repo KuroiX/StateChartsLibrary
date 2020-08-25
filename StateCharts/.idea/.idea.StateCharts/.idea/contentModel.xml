@@ -18,6 +18,12 @@
         <e p="StateChartDiagram.cs" t="Include" />
         <e p="StateChartManager.cs" t="Include" />
         <e p="StateCharts.csproj" t="IncludeRecursive" />
+        <e p="States" t="Include">
+          <e p="AtomicState.cs" t="Include" />
+          <e p="OrthogonalState.cs" t="Include" />
+          <e p="State.cs" t="Include" />
+          <e p="SuperState.cs" t="Include" />
+        </e>
       </e>
       <e p="StateCharts.sln" t="IncludeFlat" />
     </e>
