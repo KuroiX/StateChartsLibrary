@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,16 +39,19 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/StateCharts/Class1.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartDiagram.cs" />
         <option value="$PROJECT_DIR$/StateCharts/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Layer.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Configuration.cs" />
       </list>
     </option>
   </component>
@@ -72,13 +79,15 @@
       <option name="presentableId" value="Default" />
       <updated>1598378075620</updated>
       <workItem from="1598378093793" duration="7606000" />
+      <workItem from="1598953348347" duration="2662000" />
+      <workItem from="1598956358986" duration="4035000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -90,6 +99,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
@@ -99,5 +109,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="625" y="222" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1598382887916" />
+    <state x="204" y="0" width="1517" height="1027" key="dock-window-1" timestamp="1598958712734">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="204" y="0" width="1517" height="1027" key="dock-window-1/0.0.1920.1040@0.0.1920.1040" timestamp="1598958712734" />
   </component>
 </project>
