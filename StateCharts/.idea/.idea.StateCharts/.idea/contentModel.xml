@@ -7,6 +7,7 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="StateCharts" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
+        <e p="Condition.cs" t="Include" />
         <e p="Configuration.cs" t="Include" />
         <e p="Layer.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
@@ -16,7 +17,9 @@
             </e>
           </e>
         </e>
+        <e p="SimpleStateMachine.cs" t="Include" />
         <e p="Specification.cs" t="Include" />
+        <e p="StateChartBehavior.cs" t="Include" />
         <e p="StateChartDiagram.cs" t="Include" />
         <e p="StateChartManager.cs" t="Include" />
         <e p="StateCharts.csproj" t="IncludeRecursive" />
