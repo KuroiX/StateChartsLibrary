@@ -22,9 +22,7 @@
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/State.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/SimpleStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +33,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -43,15 +44,24 @@
         <option value="$PROJECT_DIR$/StateCharts/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Layer.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Configuration.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/ICondition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Condition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/StateBehavior.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/SimpleStateMachine.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/StateMachineSystem.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Specification.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Configuration.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine/HierarchicalStateMachine.cs" />
       </list>
     </option>
   </component>
@@ -68,7 +78,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -80,7 +90,10 @@
       <updated>1598378075620</updated>
       <workItem from="1598378093793" duration="7606000" />
       <workItem from="1598953348347" duration="2662000" />
-      <workItem from="1598956358986" duration="4035000" />
+      <workItem from="1598956358986" duration="5850000" />
+      <workItem from="1598962292984" duration="5251000" />
+      <workItem from="1599233071105" duration="2707000" />
+      <workItem from="1599304026375" duration="1326000" />
     </task>
     <servers />
   </component>
@@ -105,10 +118,15 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="625" y="222" key="SettingsEditor" timestamp="1598382887916">
+    <state x="536" y="165" key="#Inspection_severity" timestamp="1598962405034">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="536" y="165" key="#Inspection_severity/0.0.1920.1040@0.0.1920.1040" timestamp="1598962405034" />
+    <state x="625" y="222" key="SettingsEditor" timestamp="1598962166035">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="625" y="222" key="SettingsEditor/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1598382887916" />
+    <state x="625" y="222" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598962166035" />
     <state x="204" y="0" width="1517" height="1027" key="dock-window-1" timestamp="1598958712734">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
