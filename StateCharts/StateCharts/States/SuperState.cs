@@ -5,7 +5,8 @@ namespace StateCharts.States
     public class SuperState: State
     {
         // Initial
-        private State initial;
+        public State Initial { get; set; }
+        public List<State> States { get; set; }
 
         private State current;
         // History
@@ -23,8 +24,8 @@ namespace StateCharts.States
         public override List<State> GetInitialStates()
         {
             // TODO: history
-            List<State> initialStates = initial.GetInitialStates();
-            initialStates.Add(initial);
+            List<State> initialStates = Initial.GetInitialStates();
+            initialStates.Add(Initial);
 
             return initialStates;
         }

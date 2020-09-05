@@ -1,0 +1,11 @@
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\TestApp.deps.json
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\TestApp.runtimeconfig.json
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\TestApp.runtimeconfig.dev.json
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\TestApp.dll
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\TestApp.pdb
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.csprojAssemblyReference.cache
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.csproj.CoreCompileInputs.cache
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.AssemblyInfoInputs.cache
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.AssemblyInfo.cs
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.dll
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.pdb
