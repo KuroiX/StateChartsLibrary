@@ -8,18 +8,28 @@ namespace StateCharts
     {
         // AtomicStates only (StateMachines)
 
-        private State _initial;
-        private State _current;
-        private Dictionary<int, State> _states;
-        private Dictionary<State, List<Transition>> _transitions;
-        
         public SimpleStateMachine(string _json)
         {
             // TODO: read json file as specification
             _initial = new AtomicState();
             _states.Add(0, _initial);
         }
+        
+        #region Data
+        
+        private State _initial;                                        // Used for Specification
+        private State _current;                                        // Used for Configuration
+        private Dictionary<int, State> _states;                        // Used for Specification
+        private Dictionary<State, List<Transition>> _transitions;      // Used for Specification
+        
+        private Dictionary<string, bool> _bools;                       // Used for both
+        private Dictionary<string, bool> _triggers;                    // Used for both
+        private Dictionary<string, int> _ints;                         // Used for both
+        private Dictionary<string, float> _floats;                     // Used for both
+        
+        #endregion
 
+        #region System
         public void Execute()
         {
             foreach (StateChartBehavior behavior in _current.Behaviors)
@@ -46,7 +56,8 @@ namespace StateCharts
                     {
                         behavior.OnStateEnter();
                     }
-                    
+
+                    return;
                 }
             } 
         }
@@ -58,8 +69,7 @@ namespace StateCharts
 
         // TODO: same functions with hash-key -> faster
         // same for int, float, (trigger?)
-        
-        private Dictionary<string, bool> _bools;
+       
 
         public void AddBool(string name, bool value)
         {
@@ -79,5 +89,9 @@ namespace StateCharts
         
         
         #endregion
+
+        #endregion
+        
+        
     }
 }
