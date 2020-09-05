@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using StateCharts.OOP;
 using StateCharts.States;
 
 // ctrl + alt + shift + 8
@@ -9,9 +9,9 @@ namespace StateCharts.Transitions
     {
         public State Origin { get; }
         public State Next { get; }
-        private Specification _specification;
+        private StateChart _specification;
 
-        public Transition(State origin, State target, Specification specification)
+        public Transition(State origin, State target, StateChart specification)
         {
             Origin = origin;
             Next = target;

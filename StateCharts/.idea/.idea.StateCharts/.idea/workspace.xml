@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Configuration.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Specification.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/StateChartDiagram.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/StateChartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/StateChartManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +37,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -45,7 +49,6 @@
         <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Layer.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Configuration.cs" />
         <option value="$PROJECT_DIR$/StateCharts/ICondition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Condition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
@@ -55,13 +58,16 @@
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Configuration.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine/HierarchicalStateMachine.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Configuration.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
       </list>
     </option>
   </component>

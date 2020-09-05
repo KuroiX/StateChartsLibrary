@@ -12,5 +12,15 @@ namespace StateCharts.DOP.SimpleStateMachine
         private Dictionary<string, bool> _triggers;                    // Used for both
         private Dictionary<string, int> _ints;                         // Used for both
         private Dictionary<string, float> _floats;                     // Used for both
+        
+        // probably as ID for better data management
+        //private Specification _specification;
+        
+        // current active states
+        // Bit masks! problem: how many layers? finite possibilities, but fast
+        // other possibility: layers as an object and working on the each layer step by step
+        // other possibility: AND, OR, XOR composition
+
+        // priority?
     }
 }

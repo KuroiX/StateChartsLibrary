@@ -8,10 +8,10 @@
       <e p="StateCharts" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="Condition.cs" t="Include" />
-        <e p="Configuration.cs" t="Include" />
         <e p="DOP" t="Include">
           <e p="Configuration.cs" t="Include" />
           <e p="Specification.cs" t="Include" />
+          <e p="StateChartManager.cs" t="Include" />
           <e p="StateMachineSystem.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -25,10 +25,7 @@
           <e p="SimpleStateMachine.cs" t="Include" />
           <e p="StateChart.cs" t="Include" />
         </e>
-        <e p="Specification.cs" t="Include" />
         <e p="StateChartBehavior.cs" t="Include" />
-        <e p="StateChartDiagram.cs" t="Include" />
-        <e p="StateChartManager.cs" t="Include" />
         <e p="StateCharts.csproj" t="IncludeRecursive" />
         <e p="States" t="Include">
           <e p="AtomicState.cs" t="Include" />
