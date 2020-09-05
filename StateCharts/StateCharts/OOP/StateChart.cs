@@ -2,13 +2,11 @@ using System.Collections.Generic;
 using StateCharts.States;
 using StateCharts.Transitions;
 
-namespace StateCharts.OOP.HierarchicalStateMachine
+namespace StateCharts.OOP
 {
-    public class HierarchicalStateMachine
+    public class StateChart
     {
-        // AtomicStates only (StateMachines)
-
-        public HierarchicalStateMachine(string json)
+        public StateChart(string json)
         {
             // TODO: read json file as specification
             _initial = new AtomicState();

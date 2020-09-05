@@ -1,18 +1,39 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StateCharts.States
 {
     public class OrthogonalState : State
     {
-        private State states;
+        private List<State> states;
         public override List<State> GetSubStates()
         {
-            throw new System.NotImplementedException();
+            List<State> subStates = new List<State> {this};
+
+            foreach (State state in states)
+            {
+                foreach (State state2 in state.GetSubStates())
+                {
+                    subStates.Add(state2);
+                }
+            }
+
+            return subStates;
         }
 
         public override List<State> GetInitialStates()
         {
-            throw new System.NotImplementedException();
+            List<State> initialStates = new List<State>();
+            
+            foreach (State state in states)
+            {
+                foreach (State state2 in state.GetInitialStates())
+                {
+                    initialStates.Add(state2);
+                }
+            }
+
+            return initialStates;
         }
     }
 }

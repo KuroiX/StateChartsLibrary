@@ -22,8 +22,8 @@
           </e>
         </e>
         <e p="OOP" t="Include">
-          <e p="HierarchicalStateMachine.cs" t="Include" />
           <e p="SimpleStateMachine.cs" t="Include" />
+          <e p="StateChart.cs" t="Include" />
         </e>
         <e p="Specification.cs" t="Include" />
         <e p="StateChartBehavior.cs" t="Include" />

@@ -21,17 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Configuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Specification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/StateMachineSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/StateMachineSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Layer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine/HierarchicalStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/State.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,8 +59,9 @@
         <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine/HierarchicalStateMachine.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine.cs" />
       </list>
     </option>
   </component>
@@ -130,6 +122,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="536" y="165" key="#Inspection_severity/0.0.1920.1040@0.0.1920.1040" timestamp="1598962405034" />
+    <state x="794" y="236" key="RiderGenerateDialog" timestamp="1599311589296">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="794" y="236" key="RiderGenerateDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599311589296" />
     <state x="625" y="222" key="SettingsEditor" timestamp="1598962166035">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
