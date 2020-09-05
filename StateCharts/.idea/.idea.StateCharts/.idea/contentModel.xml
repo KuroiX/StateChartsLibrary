@@ -10,13 +10,10 @@
         <e p="Condition.cs" t="Include" />
         <e p="Configuration.cs" t="Include" />
         <e p="DOP" t="Include">
-          <e p="SimpleStateMachine" t="Include">
-            <e p="Configuration.cs" t="Include" />
-            <e p="Specification.cs" t="Include" />
-            <e p="StateMachineSystem.cs" t="Include" />
-          </e>
+          <e p="Configuration.cs" t="Include" />
+          <e p="Specification.cs" t="Include" />
+          <e p="StateMachineSystem.cs" t="Include" />
         </e>
-        <e p="Layer.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -25,12 +22,8 @@
           </e>
         </e>
         <e p="OOP" t="Include">
-          <e p="HierarchicalStateMachine" t="Include">
-            <e p="HierarchicalStateMachine.cs" t="Include" />
-          </e>
-          <e p="SimpleStateMachine" t="Include">
-            <e p="SimpleStateMachine.cs" t="Include" />
-          </e>
+          <e p="HierarchicalStateMachine.cs" t="Include" />
+          <e p="SimpleStateMachine.cs" t="Include" />
         </e>
         <e p="Specification.cs" t="Include" />
         <e p="StateChartBehavior.cs" t="Include" />

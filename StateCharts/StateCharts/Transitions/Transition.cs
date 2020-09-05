@@ -7,13 +7,13 @@ namespace StateCharts.Transitions
 {
     public class Transition
     {
-        private State _origin;
+        public State Origin { get; }
         public State Next { get; }
         private Specification _specification;
 
         public Transition(State origin, State target, Specification specification)
         {
-            _origin = origin;
+            Origin = origin;
             Next = target;
             _specification = specification;
         }

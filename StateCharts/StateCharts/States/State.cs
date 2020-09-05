@@ -10,5 +10,8 @@ namespace StateCharts.States
 
         // Transitions
         private Transition _transition;
+        
+        public abstract List<State> GetSubStates();
+        public abstract List<State> GetInitialStates();
     }
 }

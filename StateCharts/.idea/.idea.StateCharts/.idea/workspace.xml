@@ -20,10 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/SimpleStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Configuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Specification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/StateMachineSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/StateMachineSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Layer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine/HierarchicalStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,23 +53,23 @@
         <option value="$PROJECT_DIR$/StateCharts/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Layer.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Configuration.cs" />
         <option value="$PROJECT_DIR$/StateCharts/ICondition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Condition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateBehavior.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/SimpleStateMachine.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/StateMachineSystem.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Configuration.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine/SimpleStateMachine.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/HierarchicalStateMachine/HierarchicalStateMachine.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
       </list>
     </option>
   </component>
