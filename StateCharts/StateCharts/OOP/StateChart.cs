@@ -15,14 +15,14 @@ namespace StateCharts.OOP
         public StateChart()
         {
             _bools = new Dictionary<string, bool>();
-            _triggers = new Dictionary<string, bool>();
-            _ints = new Dictionary<string, int>();
-            _floats = new Dictionary<string, float>();
+            //_triggers = new Dictionary<string, bool>();
+            //_ints = new Dictionary<string, int>();
+            //_floats = new Dictionary<string, float>();
             
             _transitions = new Dictionary<State, List<Transition>>();
             _states = new Dictionary<int, State>();
             _fullConfiguration = new List<State>();
-            basicConfiguration = new AtomicState();
+            _basicConfiguration = new AtomicState();
             
             SuperState A = new SuperState();
             State B = new AtomicState();
@@ -54,22 +54,22 @@ namespace StateCharts.OOP
         
         #region Data
         
-        private State _initial;
-        private State basicConfiguration;
-        private List<State> _fullConfiguration;
-        private Dictionary<int, State> _states;
-        private Dictionary<State, List<Transition>> _transitions;
+        public State _initial;
+        public State _basicConfiguration;
+        public List<State> _fullConfiguration;
+        public Dictionary<int, State> _states;
+        public Dictionary<State, List<Transition>> _transitions;
         
-        private Dictionary<string, bool> _bools;
-        private Dictionary<string, bool> _triggers;
-        private Dictionary<string, int> _ints;
-        private Dictionary<string, float> _floats;
+        public Dictionary<string, bool> _bools;
+        //public Dictionary<string, bool> _triggers;
+        //public Dictionary<string, int> _ints;
+        //public Dictionary<string, float> _floats;
         
         #endregion
 
         #region System
 
-        public void Next()
+        public void Update()
         {
             // TODO: behavior
             
@@ -83,18 +83,18 @@ namespace StateCharts.OOP
             
             // Possibility: No copy needed if the behavior is executed separately! (Might be more performant)
             Dictionary<string, bool> bools = _bools.ToDictionary(entry => entry.Key, entry => entry.Value);
-            Dictionary<string, bool> triggers = _triggers.ToDictionary(entry => entry.Key, entry => entry.Value);
-            Dictionary<string, int> ints = _ints.ToDictionary(entry => entry.Key, entry => entry.Value);
-            Dictionary<string, float> floats = _floats.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, bool> triggers = _triggers.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, int> ints = _ints.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, float> floats = _floats.ToDictionary(entry => entry.Key, entry => entry.Value);
             
             #endregion
             
             #region Step 2: Clear Events (triggers)
             // Might has to be moved to the end
-            foreach (string name in _triggers.Keys)
+            /*foreach (string name in _triggers.Keys)
             {
                 _triggers[name] = false;
-            }
+            }*/
             
             #endregion
             
@@ -123,13 +123,14 @@ namespace StateCharts.OOP
                 {
                     if (x.Contains(t.Origin))
                     {
-                        // TODO: also remove all parent states that are connected to the t.Origin in case t.Next is in a different parent state
+                        // TODO: maybe also remove all parent states that are connected to the t.Origin in case t.Next is in a different parent state
                         
                         // Remove all sub-states
                         foreach (State state in t.Origin.GetSubStates())
                         {
                             x.Remove(state);
                         }
+                        
                         // Add new sub-states
                         foreach (State state in t.Next.GetInitialStates())
                         {
@@ -137,6 +138,7 @@ namespace StateCharts.OOP
                         }
 
                         // Add transitions to set I (not necessary atm?)
+                        // if (t.Next.IsIntermediate) ...
                     }
                     else
                     {

@@ -1,6 +1,4 @@
-using StateCharts.States;
-
-namespace StateCharts
+namespace StateCharts.DOP
 {
     /// <summary>
     /// Manager for all StateCharts

@@ -1,0 +1,9 @@
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\bin\Debug\netstandard2.0\StateCharts.deps.json
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\bin\Debug\netstandard2.0\StateCharts.dll
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\bin\Debug\netstandard2.0\StateCharts.pdb
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\obj\Debug\netstandard2.0\StateCharts.csprojAssemblyReference.cache
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\obj\Debug\netstandard2.0\StateCharts.csproj.CoreCompileInputs.cache
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\obj\Debug\netstandard2.0\StateCharts.AssemblyInfoInputs.cache
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\obj\Debug\netstandard2.0\StateCharts.AssemblyInfo.cs
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\obj\Debug\netstandard2.0\StateCharts.dll
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\StateCharts\obj\Debug\netstandard2.0\StateCharts.pdb

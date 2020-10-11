@@ -1,12 +1,26 @@
 using System.Collections.Generic;
-using StateCharts.States;
-using StateCharts.Transitions;
 
-namespace StateCharts.DOP.SimpleStateMachine
+namespace StateCharts.DOP
 {
     public class Specification
     {
-        private State _initial;                                        // Used for Specification
+        public Specification()
+        {
+            // TODO:
+            //States = new List<State>();
+        }
+        
+        // Can be made "final" or "const"
+        // Set of states
+        public Dictionary<int, State> States { get; }
+        // Set of transitions
+        public List<Transition> Transitions { get; }
+        // Set of conditions
+        
+        // Information about the initial state
+        
+        
+        /*private State _initial;                                        // Used for Specification
         public Dictionary<int, State> States { get; }                  // Used for Specification
         public Dictionary<State, List<Transition>> Transitions { get; }// Used for Specification
         
@@ -17,9 +31,7 @@ namespace StateCharts.DOP.SimpleStateMachine
         
         public Specification(string json)
         {
-            // TODO: read json file as specification
-            _initial = new AtomicState();
-            States.Add(0, _initial);
-        }
+            
+        }*/
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using StateCharts.Conditions;
 using StateCharts.OOP;
 using StateCharts.States;
 
@@ -16,6 +17,7 @@ namespace StateCharts.Transitions
             Origin = origin;
             Next = target;
             _specification = specification;
+            _conditions = new List<Condition>();
         }
         
         // Conditions
@@ -26,7 +28,7 @@ namespace StateCharts.Transitions
 
         public void AddCondition(string name, bool value)
         {
-            _conditions.Add(new Condition(name, value));
+            _conditions.Add(new BoolEquals(name, value));
         }
 
         public void AddCondition(Condition condition)
@@ -40,7 +42,8 @@ namespace StateCharts.Transitions
 
             foreach (var condition in _conditions)
             {
-                result = result && (_specification.GetBool(condition.Name) == condition.Value);
+                //result = result && (_specification.GetBool(condition.Name) == condition.Value);
+                result = result && (condition.Evaluate(_specification.GetBool(condition.Name)));
             }
 
             return result;

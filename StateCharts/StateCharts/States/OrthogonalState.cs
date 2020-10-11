@@ -6,6 +6,12 @@ namespace StateCharts.States
     public class OrthogonalState : State
     {
         private List<State> states;
+
+        public OrthogonalState()
+        {
+            states = new List<State>();
+        }
+        
         public override List<State> GetSubStates()
         {
             List<State> subStates = new List<State> {this};

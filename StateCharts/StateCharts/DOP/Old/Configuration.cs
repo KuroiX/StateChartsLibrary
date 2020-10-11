@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using StateCharts.States;
 
-namespace StateCharts.DOP.SimpleStateMachine
+namespace StateCharts.DOP
 {
     public class Configuration
     {

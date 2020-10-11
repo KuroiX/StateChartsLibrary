@@ -12,6 +12,12 @@ namespace StateCharts.States
         // History
         private State history;
 
+        public SuperState()
+        {
+            States = new List<State>();
+        }
+        
+
         // States
         public override List<State> GetSubStates()
         {
