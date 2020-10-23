@@ -27,6 +27,7 @@ namespace StateCharts.DOP
         public State(State parent)
         {
             // TODO
+            Layer = parent.Layer + 1;
         }
 
         public List<int> GetSubStateIds()

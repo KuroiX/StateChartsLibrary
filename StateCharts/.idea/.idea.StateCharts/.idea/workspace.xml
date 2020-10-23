@@ -25,27 +25,11 @@
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts.sln" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Condition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Conditions/Condition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Old/Configuration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/StateChartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Old/StateChartManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/StateMachineSystem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/TestApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/TestApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.pdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,9 +86,10 @@
         <option value="$PROJECT_DIR$/StateCharts/DOP/Old/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Instance.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Condition.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/StateBehavior.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" />
       </list>
     </option>
@@ -171,7 +156,16 @@
       <workItem from="1600976951879" duration="8883000" />
       <workItem from="1602251046513" duration="4325000" />
       <workItem from="1602331222290" duration="6296000" />
-      <workItem from="1602428715449" duration="7891000" />
+      <workItem from="1602428715449" duration="8372000" />
+      <workItem from="1602510866331" duration="637000" />
+      <workItem from="1602516685014" duration="2391000" />
+      <workItem from="1602589012433" duration="5773000" />
+      <workItem from="1602760048486" duration="1192000" />
+      <workItem from="1602862354739" duration="598000" />
+      <workItem from="1603131319992" duration="3253000" />
+      <workItem from="1603288000722" duration="895000" />
+      <workItem from="1603379308673" duration="2210000" />
+      <workItem from="1603391694555" duration="809000" />
     </task>
     <servers />
   </component>

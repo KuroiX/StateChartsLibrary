@@ -67,6 +67,9 @@ namespace StateCharts.DOP
 
             #region Step 3: Store relevant Transitions in set T
 
+            
+            // Better iterate over states in X?
+            // But then states become bigger memory wise
             List<Transition> T = new List<Transition>();
             
             foreach (Transition t in specifications[current.SpecificationId].Transitions)
@@ -153,6 +156,10 @@ namespace StateCharts.DOP
             // 2. priority is ID
 
             #endregion
+            
+            List<int> exitedStates = new List<int>();
+            List<int> enteredStates = new List<int>();
+            List<int> transitedTransitions = new List<int>();
 
             // Step 4+5: Evaluate t with highest priority
             while (true)
@@ -173,6 +180,9 @@ namespace StateCharts.DOP
                 // 2. Are conditions/events true?
                 // 3. Is source also in X'?
                 // The third one is to check whether a higher priority transition was already executed
+                
+                // Instead of checking if source is in X and X' every time, we might be able to save the result
+                // and look it up by ID or sth
                 foreach (Transition t in T)
                 {
                     // Awesome, everything works over IDs and ints
@@ -180,6 +190,9 @@ namespace StateCharts.DOP
                     // This if is important because we might have changed currentStateIds in a previous iteration
                     if (currentStateIds.Contains(t.SourceId))
                     {
+                        // Add to transition behavior
+                        transitedTransitions.Add(t.Id);
+                        
                         // Same parent/layer?
                         Specification currentSpec = specifications[current.SpecificationId];
                         State sourceState = specifications[current.SpecificationId].States[t.SourceId];
@@ -256,7 +269,10 @@ namespace StateCharts.DOP
                         // E.g. recursive
                         foreach (int stateId in state1.GetSubStateIds())
                         {
-                            // TODO: Add left states to behavior execution queue
+                            // Behaviors will probably be saved in extra object?
+                            // That way: I only need the ID 
+                            // Also: Data oriented programming
+                            exitedStates.Add(stateId);
                             
                             currentStateIds.Remove(stateId);
                         }
@@ -264,8 +280,10 @@ namespace StateCharts.DOP
                         // State 2 and all children need to be added to X
                         foreach (int stateId in state2.GetInitialStateIds())
                         {
-                            // TODO: Add entered states to behavior execution queue
+                            enteredStates.Add(stateId);
                             
+                            // This if is for the case that we have a transition to a lower level state
+                            // than the common parent state
                             if (currentSpec.States[stateId].ParentStateId == targetState.ParentStateId)
                             {
                                 currentStateIds.Add(targetState.Id);
@@ -274,6 +292,7 @@ namespace StateCharts.DOP
                                 {
                                     // TODO: Add transition to I
                                     // Find transition?? That kinda sucks
+                                    // Maybe intermediate transitions have their transitions set
                                 }
                             }
                             else
@@ -318,13 +337,78 @@ namespace StateCharts.DOP
                     break;
                 }
             }
+            
+            // For the OnUpdates: We need to know if it was in the same state the time step before
+            // so we need to check for this as well.
+            // Or we have a dictionary for each instance that points from state id to enum {entered, updated, exited, (nothing)}
+            
+            // If we execute the behavior while entering or exiting, we only need one bool that says "entered" and then we can iterate
+            // over X' pretty easily
 
             // Step 7: Replace fullConfiguration with X
-            /*_fullConfiguration = new List<State>();
-            foreach (State state in x)
+            // This should work because we have a new currentStateIds list for every iteration
+            current.Config = currentStateIds;
+
+            foreach (int i in transitedTransitions)
             {
-                _fullConfiguration.Add(state);
-            }*/
+                // Execute
+                
+                // For now, we dont have it because we dont need it to compare to unity animator?
+                ExecuteTransitionBehavior();
+            }
+
+            foreach (int stateId in specifications[instanceId].States.Keys)
+            {
+                if (exitedStates.Contains(stateId))
+                {
+                    ExecuteExitBehavior(instanceId, stateId);
+                } 
+                else if (enteredStates.Contains(stateId))
+                {
+                    ExecuteEnterBehavior(instanceId, stateId);
+                }
+                else
+                {
+                    ExecuteUpdateBehavior(instanceId, stateId);
+                }
+            }
+        }
+
+        private void ExecuteEnterBehavior(int instanceId, int stateId)
+        {
+            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
+            {
+                // TODO: if instance stays value type, we need to make it have a return value
+                // not really, because so far the conditions/events are reference types
+                
+                // possible improvement: just give behavior system and id
+                behavior.OnStateEnter(specifications[instanceId], instances[instanceId]);
+            }
+        }
+
+        private void ExecuteUpdateBehavior(int instanceId, int stateId)
+        {
+            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
+            {
+                // TODO: if instance stays value type, we need to make it have a return value
+                // not really, because so far the conditions/events are reference types
+                behavior.OnStateUpdate(specifications[instanceId], instances[instanceId]);
+            }
+        }
+
+        private void ExecuteExitBehavior(int instanceId, int stateId)
+        {
+            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
+            {
+                // TODO: if instance stays value type, we need to make it have a return value
+                // not really, because so far the conditions/events are reference types
+                behavior.OnStateExit(specifications[instanceId], instances[instanceId]);
+            }
+        }
+
+        private void ExecuteTransitionBehavior()
+        {
+            
         }
         
         /// <summary>
@@ -346,6 +430,7 @@ namespace StateCharts.DOP
         {
             // Parallel? Im not sure if the memory thing works for parallel execution.
             // Just test it i guess.
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -353,7 +438,7 @@ namespace StateCharts.DOP
         /// </summary>
         public void ExecuteBehaviorAll()
         {
-            
+            throw new NotImplementedException();
         }
         
         /// <summary>
@@ -389,6 +474,7 @@ namespace StateCharts.DOP
         public void RemoveInstance(int instanceId)
         {
             // Evaluation -> Critique
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -401,6 +487,7 @@ namespace StateCharts.DOP
         {
             // Probably needs to be split into different types (bool, int, float, trigger)
             // Equivalent to Unity-Animator variables
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace StateCharts.DOP
             //States = new List<State>();
         }
         
-        // Can be made "final" or "const"
+        // Can be made immutable?
         // Set of states
         public Dictionary<int, State> States { get; }
         // Set of transitions
@@ -19,7 +19,9 @@ namespace StateCharts.DOP
         
         // Information about the initial state
         
-        
+        // Behavior
+        public Dictionary<int, List<StateBehavior>> Behavior { get; }
+
         /*private State _initial;                                        // Used for Specification
         public Dictionary<int, State> States { get; }                  // Used for Specification
         public Dictionary<State, List<Transition>> Transitions { get; }// Used for Specification
