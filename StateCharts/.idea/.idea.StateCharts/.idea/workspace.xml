@@ -23,13 +23,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StateCharts/Condition.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StateCharts/Specification.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StateCharts/State.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/State.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts.sln" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Conditions/BoolEquals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Conditions/BoolEquals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Conditions/BoolNotEquals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Conditions/BoolNotEquals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Conditions/Condition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Conditions/Condition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Conditions/IntEquals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Conditions/IntEquals.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/BehaviorSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Condition.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Instance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Instance.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Old/Configuration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Old/Configuration.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Old/StateChartManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Old/StateChartManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/State.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/StateBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/StateBehavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Transition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/SimpleStateMachine.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/OOP/SimpleStateMachine.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/OOP/StateChart.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/OOP/StateChartTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/OOP/StateChartTest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/StateChartBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/StateChartBehavior.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/StateCharts.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/StateCharts.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/AtomicState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/States/AtomicState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/IntermediateState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/States/IntermediateState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/States/OrthogonalState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/State.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/States/State.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/States/SuperState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/States/SuperState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/OldCharts/Transitions/Transition.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.deps.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/StateCharts.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/StateCharts.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StateCharts/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/TestApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/TestApp.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/TestApp.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestApp/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/UnitTest1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/UnitTest1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/Debug/netcoreapp2.1/TestProject1.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/Debug/netcoreapp2.1/TestProject1.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/Debug/netcoreapp2.1/TestProject1.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/Debug/netcoreapp2.1/TestProject1.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/TestProject1.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/TestProject1.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject1/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject1/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,22 +97,21 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/StateCharts/Transitions/Transition.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/E2088BF4-707B-4535-A1D2-683A76EDB1A8/28/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TestProject1/UnitTest1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OldCharts/Transitions/Transition.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/OldCharts/OOP/StateChart.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/StateCharts/Class1.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartDiagram.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/AtomicState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/StateChartManager.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Layer.cs" />
         <option value="$PROJECT_DIR$/StateCharts/ICondition.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/StateBehavior.cs" />
         <option value="$PROJECT_DIR$/StateCharts/SimpleStateMachine.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/StateMachineSystem.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/SimpleStateMachine/Specification.cs" />
@@ -70,9 +126,7 @@
         <option value="$PROJECT_DIR$/StateCharts/States/IntermediateState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/OrthogonalState.cs" />
         <option value="$PROJECT_DIR$/StateCharts/States/SuperState.cs" />
-        <option value="$PROJECT_DIR$/TestProject1/UnitTest1.cs" />
         <option value="$PROJECT_DIR$/StateCharts/OOP/StateChart.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/Condition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Conditions/Condition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Conditions/BoolNotEquals.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Conditions/IntEquals.cs" />
@@ -81,16 +135,26 @@
         <option value="$PROJECT_DIR$/StateCharts/DOP/Configuration.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/StateChartManager.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/StateMachineSystem.cs" />
-        <option value="$PROJECT_DIR$/TestApp/Program.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Old.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Old/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Instance.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/DOP/Condition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/StateBehavior.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/TestStruct.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/State.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Transition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/DOP/Condition.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/Specification.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/DOP/StateBehavior.cs" />
         <option value="$PROJECT_DIR$/StateCharts/DOP/BehaviorSystem.cs" />
+        <option value="$PROJECT_DIR$/OldCharts/Class1.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Transition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/StateBehavior.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/State.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Instance.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/Condition.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/BehaviorSystem.cs" />
+        <option value="$PROJECT_DIR$/TestApp/Program.cs" />
+        <option value="$PROJECT_DIR$/TestProject1/UnitTest1.cs" />
       </list>
     </option>
   </component>
@@ -103,10 +167,11 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.42361864" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.30010834" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.41357234" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -166,6 +231,10 @@
       <workItem from="1603288000722" duration="895000" />
       <workItem from="1603379308673" duration="2210000" />
       <workItem from="1603391694555" duration="809000" />
+      <workItem from="1603465734547" duration="5923000" />
+      <workItem from="1603533185301" duration="9609000" />
+      <workItem from="1603622487577" duration="7611000" />
+      <workItem from="1603643581655" duration="2042000" />
     </task>
     <servers />
   </component>
@@ -198,90 +267,111 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" width="1092" height="810" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1599314191566" />
-    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1600802700687">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="321" key="GridCell.Tab.0.bottom" timestamp="1603631521111">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600802700687" />
-    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1600802700687">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="321" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631521111" />
+    <state width="1877" height="321" key="GridCell.Tab.0.center" timestamp="1603631521111">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600802700687" />
-    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1600802700687">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="321" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631521111" />
+    <state width="1877" height="321" key="GridCell.Tab.0.left" timestamp="1603631521111">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600802700687" />
-    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1600802700687">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="321" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631521111" />
+    <state width="1877" height="321" key="GridCell.Tab.0.right" timestamp="1603631521111">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="282" key="GridCell.Tab.0.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600802700687" />
-    <state width="1877" height="375" key="GridCell.Tab.1.bottom" timestamp="1600796627535">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="321" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631521111" />
+    <state width="1877" height="375" key="GridCell.Tab.1.bottom" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627535" />
-    <state width="1877" height="375" key="GridCell.Tab.1.center" timestamp="1600796627534">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.1.center" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627534" />
-    <state width="1877" height="375" key="GridCell.Tab.1.left" timestamp="1600796627534">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.1.left" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627534" />
-    <state width="1877" height="375" key="GridCell.Tab.1.right" timestamp="1600796627535">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.1.right" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.1.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627535" />
-    <state width="1877" height="375" key="GridCell.Tab.2.bottom" timestamp="1600796627536">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.2.bottom" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627536" />
-    <state width="1877" height="375" key="GridCell.Tab.2.center" timestamp="1600796627536">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.2.bottom/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.2.center" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627536" />
-    <state width="1877" height="375" key="GridCell.Tab.2.left" timestamp="1600796627535">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.2.center/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.2.left" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627535" />
-    <state width="1877" height="375" key="GridCell.Tab.2.right" timestamp="1600796627536">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.2.left/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.2.right" timestamp="1603631515820">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.2.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627536" />
-    <state width="1877" height="375" key="GridCell.Tab.3.bottom" timestamp="1600796627567">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.2.right/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515820" />
+    <state width="1877" height="375" key="GridCell.Tab.3.bottom" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627567" />
-    <state width="1877" height="375" key="GridCell.Tab.3.center" timestamp="1600796627567">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.3.bottom/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.3.center" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627567" />
-    <state width="1877" height="375" key="GridCell.Tab.3.left" timestamp="1600796627566">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.3.center/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.3.left" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627566" />
-    <state width="1877" height="375" key="GridCell.Tab.3.right" timestamp="1600796627567">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.3.left/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.3.right" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.3.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627567" />
-    <state width="1877" height="375" key="GridCell.Tab.4.bottom" timestamp="1600796627568">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.3.right/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.4.bottom" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.bottom/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627568" />
-    <state width="1877" height="375" key="GridCell.Tab.4.center" timestamp="1600796627568">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.4.bottom/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.4.center" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.center/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627568" />
-    <state width="1877" height="375" key="GridCell.Tab.4.left" timestamp="1600796627568">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.4.center/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.4.left" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.left/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627568" />
-    <state width="1877" height="375" key="GridCell.Tab.4.right" timestamp="1600796627568">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.4.left/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state width="1877" height="375" key="GridCell.Tab.4.right" timestamp="1603631515855">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state width="1877" height="375" key="GridCell.Tab.4.right/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600796627568" />
-    <state x="552" y="252" key="Rider.ProjectTemplateDialog.Size" timestamp="1600788309746">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="375" key="GridCell.Tab.4.right/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603631515855" />
+    <state x="2472" y="281" key="Rider.ProjectTemplateDialog.Size" timestamp="1603648720763">
+      <screen x="1920" y="0" width="1920" height="1160" />
     </state>
     <state x="552" y="252" key="Rider.ProjectTemplateDialog.Size/-1920.0.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1600788309746" />
+    <state x="2472" y="281" key="Rider.ProjectTemplateDialog.Size/0.0.1920.1040/1920.0.1920.1160@1920.0.1920.1160" timestamp="1603648720763" />
     <state x="794" y="236" key="RiderGenerateDialog" timestamp="1600790239334">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

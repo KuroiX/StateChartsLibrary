@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace StateCharts.DOP
+namespace StateCharts
 {
     public class Instance
     {

@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 
-namespace StateCharts.DOP
+namespace StateCharts
 {
     public class Transition
     {
-        public Transition(int sourceId, int targetId)
+        public Transition(int sourceId, int targetId, int id)
         {
             SourceId = sourceId;
             TargetId = targetId;
-            
+            Id = id;
             
             // TODO: initialize properly
-            Id = -1;
-            //Conditions = new List<int>();
+            Conditions = new List<Condition>();
         }
 
 
@@ -21,7 +20,7 @@ namespace StateCharts.DOP
         public int SourceId { get; }
         public int TargetId { get; }
         
-        public int Id { get; }
+        public int Id { get; set; }
 
         // list conditions
         public List<Condition> Conditions { get; }

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
-using StateCharts.OOP;
-using StateCharts.States;
-using StateCharts.Transitions;
+using StateCharts;
+using StateCharts.DOP;
 
 namespace Tests
 {
@@ -37,5 +36,9 @@ namespace Tests
         {
             Assert.Pass();
         }
+    }
+
+    public class AtomicState
+    {
     }
 }

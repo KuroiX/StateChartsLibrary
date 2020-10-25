@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace StateCharts.DOP
+namespace StateCharts
 {
     /// <summary>
     /// We have all behaviors in one class here.
@@ -25,18 +25,61 @@ namespace StateCharts.DOP
         
         // InstanceArray
         // One instance consists of Configuration, Conditions and Events
-        private Instance[] instances;
+        public Instance[] instances { get; private set; }
         
         // Maybe external conditions here?
+        
+        #region Execute Behavior
+        private void ExecuteEnterBehavior(int instanceId, int stateId)
+        {
+            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
+            {
+                // TODO: if instance stays value type, we need to make it have a return value
+                // not really, because so far the conditions/events are reference types
+                
+                // possible improvement: just give behavior system and id
+                behavior.OnStateEnter(specifications[instanceId], instances[instanceId]);
+            }
+        }
 
+        private void ExecuteUpdateBehavior(int instanceId, int stateId)
+        {
+            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
+            {
+                // TODO: if instance stays value type, we need to make it have a return value
+                // not really, because so far the conditions/events are reference types
+                behavior.OnStateUpdate(specifications[instanceId], instances[instanceId]);
+            }
+        }
+
+        private void ExecuteExitBehavior(int instanceId, int stateId)
+        {
+            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
+            {
+                // TODO: if instance stays value type, we need to make it have a return value
+                // not really, because so far the conditions/events are reference types
+                behavior.OnStateExit(specifications[instanceId], instances[instanceId]);
+            }
+        }
+
+        private void ExecuteTransitionBehavior()
+        {
+            
+        }
+        
+        #endregion
+        
         /// <summary>
         /// Executes step function for one instance. This is the important function.
         /// </summary>
         /// <param name="instanceId"></param>
         public void ExecuteStep(int instanceId)
         {
+            // Helper
             Instance current = instances[instanceId];
+            Specification currentSpec = specifications[current.SpecificationId];
 
+            
             #region Step 1: Snapshot X, C and E
 
             // This can be made way more performant with value types (int as IDs)
@@ -47,14 +90,15 @@ namespace StateCharts.DOP
             }
             
             // Possibility: No copy needed if the behavior is executed separately! (Might be more performant)
-            Dictionary<string, bool> bools = current.Bools.ToDictionary(entry => entry.Key, entry => entry.Value);
-            Dictionary<string, bool> triggers = current.Triggers.ToDictionary(entry => entry.Key, entry => entry.Value);
-            Dictionary<string, int> ints = current.Ints.ToDictionary(entry => entry.Key, entry => entry.Value);
-            Dictionary<string, float> floats = current.Floats.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, bool> bools = current.Bools.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, bool> triggers = current.Triggers.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, int> ints = current.Ints.ToDictionary(entry => entry.Key, entry => entry.Value);
+            //Dictionary<string, float> floats = current.Floats.ToDictionary(entry => entry.Key, entry => entry.Value);
             
 
             #endregion
 
+            /*
             #region Step 2: Clear Events (triggers)
 
             // Might has to be moved to the end
@@ -64,7 +108,199 @@ namespace StateCharts.DOP
             }
 
             #endregion
+            */
+            
+            #region Execute maximal subset of non-conflicting transitions by priority
+            
+            // TODO: Test
+            // Iterate twice and then sort or iterate once over sorted transitions
+            
+            // For each transition with source state in X
+            
+            foreach (Transition t in currentSpec.Transitions)
+            {
+                // Check if source state is still part of X'
+                if (currentStateIds.Contains(t.SourceId) && current.Config.Contains(t.SourceId))
+                {
+                    bool result = true;
+                    
+                    // Check if conditions/events evaluate to true
+                    foreach (Condition c in t.Conditions)
+                    {
+                        // CARE: Might have to work with copies of Triggers, Bools, and so on later 
+                        // when doing the behavior
+                        
+                        // Triggers
+                        if (c.Type == 0)
+                        {
+                            result &= current.Triggers[c.Name];
+                        }
+                        // Bools
+                        else if (c.Type == 1)
+                        {
+                            if (c.Operation == 0)
+                            {
+                                result &= current.Bools[c.Name];
+                            } 
+                            else if (c.Operation == 1)
+                            {
+                                result &= !current.Bools[c.Name];
+                            }
+                        }
+                        // Ints
+                        else if (c.Type == 2)
+                        {
+                            // <
+                            if (c.Operation == 0)
+                            {
+                                result &= (current.Ints[c.Name] < c.IntValue);
+                            }
+                            // >
+                            else if (c.Operation == 1)
+                            {
+                                result &= (current.Ints[c.Name] > c.IntValue);
+                            }
+                            // ==
+                            else if (c.Operation == 2)
+                            {
+                                result &= (current.Ints[c.Name] == c.IntValue);
+                            }
+                            // !=
+                            else if (c.Operation == 3)
+                            {
+                                result &= (current.Ints[c.Name] != c.IntValue);
+                            }
+                    
+                        }
+                        // Floats
+                        else
+                        {
+                            // <
+                            if (c.Operation == 0)
+                            {
+                                result &= (current.Floats[c.Name] < c.FloatValue);
+                            }
+                            // >
+                            else if (c.Operation == 1)
+                            {
+                                result &= (current.Floats[c.Name] > c.FloatValue);
+                            }
+                        }
 
+                        if (!result) break;
+                    }
+                    
+                    // If transition is relevant, update X' accordingly
+                    if (result)
+                    {
+                        #region Find closest common relative
+                        // Same parent/layer?
+                        State sourceState = currentSpec.States[t.SourceId];
+                        State targetState = currentSpec.States[t.TargetId];
+
+                        State sourceSystem = sourceState;
+                        State targetSystem = targetState;
+                        
+                        // Set sourceSystem and targetSystems layer to same layer
+                        if (sourceState.Layer < targetState.Layer)
+                        {
+                            // Find closest relative
+                            
+                            // Check parent layer until parent layer = target layer
+                            // we know in advance how many layers above it is
+
+                            for (int i = 0; i < targetState.Layer - sourceState.Layer; i++)
+                            {
+                                targetSystem = currentSpec.States[targetSystem.ParentStateId];
+                            }
+                        
+                            // Safety check:
+                            if (targetSystem.Layer != sourceSystem.Layer)
+                            {
+                                throw new Exception("Layer is not the same.");
+                            }
+
+                        }
+                        else if (sourceState.Layer > targetState.Layer)
+                        {
+                            for (int i = 0; i < sourceState.Layer - targetState.Layer; i++)
+                            {
+                                sourceSystem = currentSpec.States[sourceSystem.ParentStateId];
+                            }
+                        
+                            // Safety check:
+                            if (targetSystem.Layer != sourceSystem.Layer)
+                            {
+                                throw new Exception("Layer is not the same.");
+                            }
+                        }
+                        
+                        // At this point, we still need to have both systems have the same parent
+                        while (sourceSystem.ParentStateId != targetSystem.ParentStateId)
+                        {
+                            // Find lowest layer with same parent
+                            sourceSystem = currentSpec.States[sourceSystem.ParentStateId];
+                            targetSystem = currentSpec.States[targetSystem.ParentStateId];
+                        }
+                        #endregion
+                        
+                        #region Update X'
+                    
+                        // State 1 and all children need to be removed from X
+                        // Either we find all states or we have the information in the states
+                        // Having the information seems way easier for the calculation
+                        // But not as easy for the memory
+                        // E.g. recursive
+                        List<int> subStates = currentSpec.GetSubStates(sourceSystem.Id);
+                        foreach (int stateId in subStates) 
+                        {
+                            // Behaviors will probably be saved in extra object?
+                            // That way: I only need the ID 
+                            // Also: Data oriented programming
+                            //exitedStates.Add(stateId);
+                            
+                            currentStateIds.Remove(stateId);
+                        }
+                        
+                        // State 2 and all children need to be added to X
+                        foreach (int stateId in currentSpec.GetInitialStates(targetSystem.Id))
+                        {
+                            //enteredStates.Add(stateId);
+                            
+                            // This if is for the case that we have a transition to a lower level state
+                            // than the common parent state
+                            if (currentSpec.States[stateId].ParentStateId == targetState.ParentStateId)
+                            {
+                                currentStateIds.Add(targetState.Id);
+
+                                if (targetState.IsIntermediate)
+                                {
+                                    // TODO: Add transition to I
+                                    // Find transition?? That kinda sucks
+                                    // Maybe intermediate transitions have their transitions set
+                                }
+                            }
+                            else
+                            {
+                                currentStateIds.Add(stateId);
+
+                                if (currentSpec.States[stateId].IsIntermediate)
+                                {
+                                    // TODO: Add transition to I
+                                    // Find transition?? That kinda sucks
+                                }
+                            }
+                        }
+                        #endregion
+
+                    }
+                    
+                }
+            }
+
+            #endregion
+            
+            /*
             #region Step 3: Store relevant Transitions in set T
 
             
@@ -75,6 +311,7 @@ namespace StateCharts.DOP
             foreach (Transition t in specifications[current.SpecificationId].Transitions)
             {
                 // TODO: Check source?
+                if (!current.Config.Contains(t.SourceId)) continue;
                 bool result = true;
                 
                 // Evaluate
@@ -85,20 +322,12 @@ namespace StateCharts.DOP
                         // Trigger
 
                         result &= triggers[c.Name];
-                        /*if (!triggers[c.Name])
-                        {
-                            result = false;
-                        }*/
                     } 
                     else if (c.Type == 1)
                     {
                         // Bool
                         result &= (bools[c.Name] == c.BoolValue);
 
-                        /*if (!bools[c.Name] == c.BoolValue)
-                        {
-                            result = false;
-                        }*/
                     }
                     else if (c.Type == 2)
                     {
@@ -156,11 +385,13 @@ namespace StateCharts.DOP
             // 2. priority is ID
 
             #endregion
+            */
             
-            List<int> exitedStates = new List<int>();
-            List<int> enteredStates = new List<int>();
-            List<int> transitedTransitions = new List<int>();
+            //List<int> exitedStates = new List<int>();
+            //List<int> enteredStates = new List<int>();
+            //List<int> transitedTransitions = new List<int>();
 
+            /*
             // Step 4+5: Evaluate t with highest priority
             while (true)
             {
@@ -191,10 +422,10 @@ namespace StateCharts.DOP
                     if (currentStateIds.Contains(t.SourceId))
                     {
                         // Add to transition behavior
-                        transitedTransitions.Add(t.Id);
+                        //transitedTransitions.Add(t.Id);
                         
                         // Same parent/layer?
-                        Specification currentSpec = specifications[current.SpecificationId];
+                        //Specification currentSpec = specifications[current.SpecificationId];
                         State sourceState = specifications[current.SpecificationId].States[t.SourceId];
                         State targetState = specifications[current.SpecificationId].States[t.TargetId];
 
@@ -206,7 +437,6 @@ namespace StateCharts.DOP
                             // Check parent layer until parent layer = target layer
                             // we know in advance how many layers above it is
 
-                            int sameId = -1;
                             State iterate = targetState;
                             for (int i = 0; i < targetState.Layer - sourceState.Layer; i++)
                             {
@@ -272,7 +502,7 @@ namespace StateCharts.DOP
                             // Behaviors will probably be saved in extra object?
                             // That way: I only need the ID 
                             // Also: Data oriented programming
-                            exitedStates.Add(stateId);
+                            //exitedStates.Add(stateId);
                             
                             currentStateIds.Remove(stateId);
                         }
@@ -280,7 +510,7 @@ namespace StateCharts.DOP
                         // State 2 and all children need to be added to X
                         foreach (int stateId in state2.GetInitialStateIds())
                         {
-                            enteredStates.Add(stateId);
+                            //enteredStates.Add(stateId);
                             
                             // This if is for the case that we have a transition to a lower level state
                             // than the common parent state
@@ -337,6 +567,7 @@ namespace StateCharts.DOP
                     break;
                 }
             }
+            */
             
             // For the OnUpdates: We need to know if it was in the same state the time step before
             // so we need to check for this as well.
@@ -349,7 +580,7 @@ namespace StateCharts.DOP
             // This should work because we have a new currentStateIds list for every iteration
             current.Config = currentStateIds;
 
-            foreach (int i in transitedTransitions)
+            /*foreach (int i in transitedTransitions)
             {
                 // Execute
                 
@@ -371,46 +602,9 @@ namespace StateCharts.DOP
                 {
                     ExecuteUpdateBehavior(instanceId, stateId);
                 }
-            }
+            }*/
         }
 
-        private void ExecuteEnterBehavior(int instanceId, int stateId)
-        {
-            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
-            {
-                // TODO: if instance stays value type, we need to make it have a return value
-                // not really, because so far the conditions/events are reference types
-                
-                // possible improvement: just give behavior system and id
-                behavior.OnStateEnter(specifications[instanceId], instances[instanceId]);
-            }
-        }
-
-        private void ExecuteUpdateBehavior(int instanceId, int stateId)
-        {
-            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
-            {
-                // TODO: if instance stays value type, we need to make it have a return value
-                // not really, because so far the conditions/events are reference types
-                behavior.OnStateUpdate(specifications[instanceId], instances[instanceId]);
-            }
-        }
-
-        private void ExecuteExitBehavior(int instanceId, int stateId)
-        {
-            foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
-            {
-                // TODO: if instance stays value type, we need to make it have a return value
-                // not really, because so far the conditions/events are reference types
-                behavior.OnStateExit(specifications[instanceId], instances[instanceId]);
-            }
-        }
-
-        private void ExecuteTransitionBehavior()
-        {
-            
-        }
-        
         /// <summary>
         /// Executes step function for all instances. This is the important function.
         /// </summary>
@@ -450,18 +644,140 @@ namespace StateCharts.DOP
         /// <exception cref="NotImplementedException"></exception>
         public int CreateSpecification(string json)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+
+            #region States
+            State AB = new State(-1, 0, 0);
+
+            State A = new State(AB.Id, AB.Layer + 1, 1);
+            State B = new State(AB.Id, AB.Layer + 1, 2);
+
+            
+            State Y = new State(-1, 0, 3);
+            
+            State C = new State(Y.Id, Y.Layer +1, 4);
+            State D = new State(Y.Id, Y.Layer +1, 5);
+            State E = new State(Y.Id, Y.Layer +1, 6);
+            State F = new State(Y.Id, Y.Layer +1, 7);
+            State G = new State(Y.Id, Y.Layer +1, 8);
+            #endregion
+            
+            #region Transitions
+            Transition AtoB = new Transition(A.Id, B.Id, 0);
+            Transition BtoY = new Transition(B.Id, Y.Id, 1);
+            Transition CtoD = new Transition(C.Id, D.Id, 2);
+            Transition DtoE = new Transition(D.Id, E.Id, 3);
+            Transition FtoG = new Transition(F.Id, G.Id, 5);
+            Transition GtoAB = new Transition(G.Id, AB.Id, 4);
+            #endregion
+            
+            #region Conditions
+            Condition cAB = new Condition(1, 0, "boolTrue");
+            Condition cBY = new Condition(1, 1, "boolFalse");
+            Condition cCD = new Condition(2, 0, "intLess", 1);
+            Condition cDE = new Condition(2, 1, "intGreater", -1);
+            Condition cFG = new Condition(2, 2, "intEq", 0);
+            Condition cGAB = new Condition(2, 3, "intNeq", 1);
+            
+            AtoB.Conditions.Add(cAB);
+            BtoY.Conditions.Add(cBY);
+            CtoD.Conditions.Add(cCD);
+            DtoE.Conditions.Add(cDE);
+            GtoAB.Conditions.Add(cGAB);
+            FtoG.Conditions.Add(cFG);
+
+            #endregion
+            
+            #region Specification
+
+            Specification specification = new Specification();
+            specification.InitialStates[-1] = new List<int>() {AB.Id};
+
+            specification.States.Add(AB.Id, AB);
+            specification.States.Add(A.Id, A);
+            specification.States.Add(B.Id, B);
+            
+            specification.States.Add(Y.Id, Y);
+            specification.States.Add(C.Id, C);
+            specification.States.Add(D.Id, D);
+            specification.States.Add(E.Id, E);
+            specification.States.Add(F.Id, F);
+            specification.States.Add(G.Id, G);
+            
+            specification.Transitions.Add(AtoB);
+            specification.Transitions.Add(BtoY);
+            specification.Transitions.Add(CtoD);
+            specification.Transitions.Add(DtoE);
+            specification.Transitions.Add(FtoG);
+            specification.Transitions.Add(GtoAB);
+
+            specification.Bools.Add("boolTrue", true);
+            specification.Bools.Add("boolFalse", false);
+
+            specification.Ints.Add("intLess", 0);
+            specification.Ints.Add("intGreater", 0);
+            specification.Ints.Add("intEq", 0);
+            specification.Ints.Add("intNeq", 0);
+
+            specification.Hierarchy[0] = new List<int> {1, 2};
+            specification.Hierarchy[3] = new List<int> {4, 5, 6, 7, 8};
+
+            specification.InitialStates[0] = new List<int> {1};
+            specification.InitialStates[3] = new List<int> {4, 7};
+
+            #endregion
+
+            // how do i get a random key?
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            return size;
         }
 
         /// <summary>
         /// Creates an Instance of a given specification ID.
         /// </summary>
-        /// <param name="specification">ID of the specification that is used to create the Instance</param>
+        /// <param name="specificationId">ID of the specification that is used to create the Instance</param>
         /// <returns>ID of the Instance</returns>
         /// <exception cref="NotImplementedException"></exception>
-        public int CreateInstance(int specification)
+        public int CreateInstance(int specificationId)
         {
-            throw new NotImplementedException();
+            Instance instance = new Instance(specificationId);
+
+            foreach (string key in specifications[specificationId].Bools.Keys)
+            {
+                instance.Bools.Add(key, specifications[specificationId].Bools[key]);
+            }
+
+            foreach (string key in specifications[specificationId].Ints.Keys)
+            {
+                instance.Ints.Add(key, specifications[specificationId].Ints[key]);
+            }
+
+            foreach (string key in specifications[specificationId].Floats.Keys)
+            {
+                instance.Floats.Add(key, specifications[specificationId].Floats[key]);
+            }
+
+            foreach (string key in specifications[specificationId].Triggers.Keys)
+            {
+                instance.Triggers.Add(key, specifications[specificationId].Triggers[key]);
+            }
+            
+            instance.Config.Add(0);
+            instance.Config.Add(1);
+
+            Instance[] newInstances = new Instance[instances.Length + 1];
+            for (int i = 0; i < instances.Length; i++)
+            {
+                newInstances[i] = instances[i];
+            }
+            newInstances[instances.Length] = instance;
+
+            instances = newInstances;
+
+            return instances.Length;
+
+            //throw new NotImplementedException();
         }
 
         /// <summary>

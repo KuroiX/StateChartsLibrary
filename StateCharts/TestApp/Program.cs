@@ -1,51 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using StateCharts.OOP;
+using StateCharts;
 
 namespace TestApp
 {
     class Program
     {
-        struct test
-        {
-            public int i;
-            public testi t;
-        }
-
-        class testi
-        {
-            public int i;
-        }
-
         static void Main(string[] args)
         {
-            test myTest;
-            myTest.i = 5;
-            testi t = new testi();
-            t.i = 4;
-            myTest.t = t;
-
-            Dictionary<int, test> testDict = new Dictionary<int, test> {{1, myTest}};
-
-            //Console.WriteLine(myTest.i);
-            Console.WriteLine(testDict[1].i);
-            //Console.WriteLine(testDict[1].t.i);
-
-            test MYtest = new test();
-
-            testDict[1] = MYtest;
-            testDict[2] = myTest;
-
+            // For now, this should be a State Machine with three states.
             
-            MYtest.i = 3;
+            BehaviorSystem mySystem = new BehaviorSystem();
 
-            myTest.i = 0;
-            myTest.t.i = 0;
+            int id = mySystem.CreateSpecification("");
             
-            //Console.WriteLine(myTest.i);
-            Console.WriteLine(testDict[1].i);
-            Console.WriteLine(testDict[2].i);
-            //Console.WriteLine(testDict[1].t.i);
+            Console.WriteLine("Nice");
+
+            for (int i = 0; i < 10000; i++)
+            {
+                mySystem.CreateInstance(id);
+            }
+            int instanceId = mySystem.CreateInstance(id);
+
+            Console.WriteLine("DoubleNice");
+
+            for (int i = 0; i < 1; i++)
+            {
+                mySystem.ExecuteStepAll();
+            }
+
+            Console.WriteLine("UltraTripleNice");
         }
     }
 }

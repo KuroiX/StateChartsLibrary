@@ -12,3 +12,4 @@ C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\D
 C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\StateCharts.dll
 C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\bin\Debug\netcoreapp2.1\StateCharts.pdb
 C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.csproj.CopyComplete
+C:\Users\KuroiX\Desktop\SS20\Thesis\StateChartsLibrary\StateCharts\TestApp\obj\Debug\netcoreapp2.1\TestApp.genruntimeconfig.cache

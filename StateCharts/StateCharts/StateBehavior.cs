@@ -1,4 +1,4 @@
-namespace StateCharts.DOP
+namespace StateCharts
 {
     public abstract class StateBehavior
     {
