@@ -18,7 +18,7 @@ namespace StateCharts
         public BehaviorSystem()
         {
             specifications = new Dictionary<int, Specification>();
-            instances = new Instance[0];
+            Instances = new Instance[0];
         }
         
         // Specifications
@@ -27,7 +27,7 @@ namespace StateCharts
         
         // InstanceArray
         // One instance consists of Configuration, Conditions and Events
-        public Instance[] instances { get; private set; }
+        public Instance[] Instances { get; private set; }
         
         // Maybe external conditions here?
         
@@ -40,7 +40,7 @@ namespace StateCharts
                 // not really, because so far the conditions/events are reference types
                 
                 // possible improvement: just give behavior system and id
-                behavior.OnStateEnter(specifications[instanceId], instances[instanceId]);
+                behavior.OnStateEnter(specifications[instanceId], Instances[instanceId]);
             }
         }
 
@@ -50,7 +50,7 @@ namespace StateCharts
             {
                 // TODO: if instance stays value type, we need to make it have a return value
                 // not really, because so far the conditions/events are reference types
-                behavior.OnStateUpdate(specifications[instanceId], instances[instanceId]);
+                behavior.OnStateUpdate(specifications[instanceId], Instances[instanceId]);
             }
         }
 
@@ -60,7 +60,7 @@ namespace StateCharts
             {
                 // TODO: if instance stays value type, we need to make it have a return value
                 // not really, because so far the conditions/events are reference types
-                behavior.OnStateExit(specifications[instanceId], instances[instanceId]);
+                behavior.OnStateExit(specifications[instanceId], Instances[instanceId]);
             }
         }
 
@@ -74,11 +74,11 @@ namespace StateCharts
         /// <summary>
         /// Executes step function for one instance. This is the important function.
         /// </summary>
-        /// <param name="instanceId"></param>
+        /// <param name="instanceId">The Id of the instance.</param>
         public void ExecuteStep(int instanceId)
         {
             // Helper, causes overhead but makes code easier to read
-            Instance current = instances[instanceId];
+            Instance current = Instances[instanceId];
             Specification currentSpec = specifications[current.SpecificationId];
 
             
@@ -133,7 +133,9 @@ namespace StateCharts
                         // CARE: Might have to work with copies of Triggers, Bools, and so on later 
                         // when doing the behavior
 
+                        #region Evaluate condition
                         Condition c = conditions[j];
+                        
                         // Triggers
                         if (c.Type == 0)
                         {
@@ -193,7 +195,9 @@ namespace StateCharts
                             // Error handling
                             Console.WriteLine("Something went wrong");
                         }
-
+                        
+                        #endregion
+                        
                         if (!result) break;
                     }
                     
@@ -226,9 +230,10 @@ namespace StateCharts
                         */
 
                         int layerMask = 15;
-                        int targetLayer = 15;
+                        //int targetLayer = 15;
                         for (int i = 1; i < 8; i++)
                         {
+                            /*
                             int intermediate = (targetIdMask & (15 << (4 * i)));
 
                             if (intermediate == 0)
@@ -239,7 +244,8 @@ namespace StateCharts
                             }
 
                             targetLayer <<= 4;
-
+                            */
+                            
                             if ((targetIdMask & layerMask) == (sourceIdMask & layerMask))
                             {
                                 layerMask = (layerMask << 4) + 15;
@@ -366,11 +372,11 @@ namespace StateCharts
 
                         //int layer = FindLayer(targetIdMask);
 
-                        int currentMask = (-1) - targetLayer;
+                        //int currentMask = (-1) - targetLayer;
 
                         // For debugging:
-                        string binary = Convert.ToString(currentMask, 2);
-                        string binary2 = Convert.ToString(layerMask, 2);
+                        //string binary = Convert.ToString(currentMask, 2);
+                        //string binary2 = Convert.ToString(layerMask, 2);
                         
                         
                         AddSubStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetIdMask, (layerMask << 4) + 15);
@@ -889,7 +895,7 @@ namespace StateCharts
         /// </summary>
         public void ExecuteStepAll()
         {
-            for (int i = 0; i < instances.Length; i++)
+            for (int i = 0; i < Instances.Length; i++)
             {
                 ExecuteStep(i);
             }
@@ -1376,16 +1382,16 @@ namespace StateCharts
                 AddSubStatesRecSimple(instance.Config, specifications[specificationId].States.InitialStates, initial);
             }
 
-            Instance[] newInstances = new Instance[instances.Length + 1];
-            for (int i = 0; i < instances.Length; i++)
+            Instance[] newInstances = new Instance[Instances.Length + 1];
+            for (int i = 0; i < Instances.Length; i++)
             {
-                newInstances[i] = instances[i];
+                newInstances[i] = Instances[i];
             }
-            newInstances[instances.Length] = instance;
+            newInstances[Instances.Length] = instance;
 
-            instances = newInstances;
+            Instances = newInstances;
 
-            return instances.Length;
+            return Instances.Length;
 
             //throw new NotImplementedException();
         }
