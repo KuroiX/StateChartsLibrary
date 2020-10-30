@@ -7,11 +7,12 @@ namespace StateCharts
     {
         //public State parentState { get; }
 
+        //public int LayerMask { get; }
         public int ParentStateId { get; }
         public int Layer { get; }
-        
-        // Not sure if I want to have this (or need it)
-        public int Id { get; set; }
+        // Combination of Id and LayerMask
+        public int IdMask { get; }
+        public int InitialMask { get; }
         
         public bool IsIntermediate { get; }
         
@@ -32,15 +33,17 @@ namespace StateCharts
             //IsSuperstate = false;
             //IsOrthogonalState = false;
             //ChildrenInitialStateIds = 0;
-            Id = 0;
+            IdMask = 0;
+            InitialMask = 0;
         }
 
-        public State(int parentId, int layer, int id)
+        public State(int parentId, int layer, int idMask, int initialMask)
         {
             ParentStateId = parentId;
             Layer = layer;
-            Id = id;
+            IdMask = idMask;
             IsIntermediate = false;
+            InitialMask = initialMask;
         }
 
         /*

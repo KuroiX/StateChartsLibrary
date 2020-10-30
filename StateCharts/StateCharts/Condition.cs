@@ -1,43 +1,38 @@
+using System.Runtime.InteropServices;
+
 namespace StateCharts
 {
-    public class Condition
+    public struct Condition
     {
-        public Condition(int type, int operation, string name)
+        public Condition(int type, int key)
         {
             Type = type;
-            Operation = operation;
-            Name = name;
+            Key = key;
+            Value = 0;
         }
         
-        public Condition(int type, int operation, string name, int value)
+        public Condition(int type, int key, int value)
         {
             Type = type;
-            Operation = operation;
-            Name = name;
-            IntValue = value;
+            Key = key;
+            Value = value;
         }
         
-        public Condition(int type, int operation, string name, float value)
+        public Condition(int type, int key, float value)
         {
             Type = type;
-            Operation = operation;
-            Name = name;
-            FloatValue = value;
+            Key = key;
+            unsafe
+            {
+                Value = * (int*) &value;
+            }
         }
-        
-        // Idee:
-        // Kinda enum
-        public int Type { get; set; }
-        public int Operation { get; set; }
         
         // REFERENCE TYPE
-        public string Name { get; set; }
+        //public string Name { get; set; }
         
-        // TODO: Idea
-        // Just take one and interpret it differently
-        // they are all bits after all
-        // takes some effort with unsafe code
-        public int IntValue { get; set; }
-        public float FloatValue { get; set; }
+        public int Type { get; }
+        public int Key { get; }
+        public int Value { get; }
     }
 }

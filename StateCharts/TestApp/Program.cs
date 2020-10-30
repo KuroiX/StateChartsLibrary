@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using StateCharts;
 
 namespace TestApp
@@ -7,15 +8,32 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
+            /*
+            float f = 2.0f;
+            int j;
+
+            unsafe
+            {
+                j = *((int*) &f);
+            }
+
+            Console.WriteLine(j);
+
+            test myTest = new test {floatValue = 2.0f};
+
+            Console.WriteLine(myTest.boolValue + " " + myTest.intValue + " " + myTest.floatValue);
+            */
+            
             // For now, this should be a State Machine with three states.
             
             BehaviorSystem mySystem = new BehaviorSystem();
 
             int id = mySystem.CreateSpecification("");
             
+            
             Console.WriteLine("Nice");
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 mySystem.CreateInstance(id);
             }
@@ -23,7 +41,7 @@ namespace TestApp
 
             Console.WriteLine("DoubleNice");
 
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 mySystem.ExecuteStepAll();
             }

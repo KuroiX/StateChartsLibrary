@@ -9,10 +9,10 @@ namespace StateCharts
             SpecificationId = specificationId;
             // TODO: initial state
             Config = new List<int>();
-            Bools = new Dictionary<string, bool>();
-            Triggers = new Dictionary<string, bool>();
-            Ints = new Dictionary<string, int>();
-            Floats = new Dictionary<string, float>();
+            Bools = new Dictionary<int, bool>();
+            Triggers = new Dictionary<int, bool>();
+            Ints = new Dictionary<int, int>();
+            Floats = new Dictionary<int, float>();
         }
 
         // Information about the specification
@@ -31,10 +31,10 @@ namespace StateCharts
 
         // Info about the Conditions/Events
         // Best case all in one place memory wise
-        public Dictionary<string, bool> Bools { get; set; }
-        public Dictionary<string, bool> Triggers { get; set; }
-        public Dictionary<string, int> Ints { get; set; }
-        public Dictionary<string, float> Floats { get; set; }
+        public Dictionary<int, bool> Bools { get; set; }
+        public Dictionary<int, bool> Triggers { get; set; }
+        public Dictionary<int, int> Ints { get; set; }
+        public Dictionary<int, float> Floats { get; set; }
 
     }
 }

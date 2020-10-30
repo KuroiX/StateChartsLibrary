@@ -7,24 +7,25 @@ namespace StateCharts
     {
         public Specification()
         {
-            // TODO:
-            States = new Dictionary<int, State>();
-            Transitions = new List<Transition>();
+            //States = new Dictionary<int, State>();
             Behavior = new Dictionary<int, List<StateBehavior>>();
-            Hierarchy = new Dictionary<int, List<int>>();
-            InitialStates = new Dictionary<int, List<int>>();
+            //Hierarchy = new Dictionary<int, List<int>>();
+            //InitialStates = new Dictionary<int, List<int>>();
             
-            Ints = new Dictionary<string, int>();
-            Floats = new Dictionary<string, float>();
-            Bools = new Dictionary<string, bool>();
-            Triggers = new Dictionary<string, bool>();
+            Ints = new Dictionary<int, int>();
+            Floats = new Dictionary<int, float>();
+            Bools = new Dictionary<int, bool>();
+            Triggers = new Dictionary<int, bool>();
         }
         
         // Can be made immutable?
         // Set of states
-        public Dictionary<int, State> States { get; }
-        public Dictionary<int, List<int>> Hierarchy { get; }
+        public StateCollection States { get; set; }
+        //public Dictionary<int, State> States { get; }
+        //public Dictionary<int, List<int>> Hierarchy { get; }
 
+        // Hierarchy and so on can be commented in if needed
+        /*
         public List<int> GetSubStates(int initialId)
         {
             List<int> subStates = new List<int> {initialId};
@@ -44,10 +45,11 @@ namespace StateCharts
 
             return subStates;
         }
+        */
         
-        public Dictionary<int, List<int>> InitialStates { get; }
+        //public Dictionary<int, List<int>> InitialStates { get; }
 
-        public List<int> GetInitialStates(int id)
+        /*public List<int> GetInitialStates(int id)
         {
             List<int> subStates = new List<int> {id};
             
@@ -66,9 +68,10 @@ namespace StateCharts
 
             return subStates;
         }
-        
+        */
         // Set of transitions
-        public List<Transition> Transitions { get; set; }
+        public TransitionCollection Transitions { get; set; }
+        //public List<Transition> Transitions { get; set; }
         // Set of conditions
         
         // Information about the initial state
@@ -76,18 +79,15 @@ namespace StateCharts
         // Behavior
         public Dictionary<int, List<StateBehavior>> Behavior { get; }
 
-        /*private State _initial;                                        // Used for Specification
+        /*
+        private State _initial;                                        // Used for Specification
         public Dictionary<int, State> States { get; }                  // Used for Specification
         public Dictionary<State, List<Transition>> Transitions { get; }// Used for Specification
         */
-        public Dictionary<string, int> Ints;                         // Used for both
-        public Dictionary<string, float> Floats;                     // Used for both
-        public Dictionary<string, bool> Bools;                       // Used for both
-        public Dictionary<string, bool> Triggers;                    // Used for both
-        /*
-        public Specification(string json)
-        {
-            
-        }*/
+        public Dictionary<int, int> Ints;                         // Used for both
+        public Dictionary<int, float> Floats;                     // Used for both
+        public Dictionary<int, bool> Bools;                       // Used for both
+        public Dictionary<int, bool> Triggers;                    // Used for both
+        
     }
 }
