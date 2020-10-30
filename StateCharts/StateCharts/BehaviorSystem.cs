@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace StateCharts
 {
@@ -372,7 +373,7 @@ namespace StateCharts
                         string binary2 = Convert.ToString(layerMask, 2);
                         
                         
-                        AddSubStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetIdMask, currentMask);
+                        AddSubStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetIdMask, (layerMask << 4) + 15);
 
                         // Not working alternative
                         /*
@@ -441,8 +442,6 @@ namespace StateCharts
                     }
                 }
             }
-
-            
 
             #endregion
             
@@ -751,8 +750,14 @@ namespace StateCharts
             }*/
         }
 
-        void AddSubStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask, int targetIdMask, int parentIdMask)
+        void AddSubStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask, int targetIdMask, int layerMask)
         {
+            if (targetIdMask == targetSystemIdMask)
+            {
+                AddSubStatesRecSimple(config, initialStates, targetIdMask);
+                return;
+            }
+            
             config.Add(targetSystemIdMask);
 
             // Version 1: Dictionary
@@ -767,11 +772,64 @@ namespace StateCharts
             for (int i = 0; i < length; i++)
             {
                 int idMask = states[i];
+                if (length >= 2)
+                {
+                    // Parallel states
+                    // This means we do not have to check for targetIdMask, as parallel states are never 
+                    // targets for transitions
+                    // (the parent is, so indirectly every orthogonal state gets entered anyways)
+                    
+                    // Our targetIdMask is a child of one of the orthogonal states, but not the other ones
+                    // Let's check
+                    
+                    // We need the currentLayerMask for this
+                    int targetParent = (targetIdMask & layerMask);
+                    int test = (targetParent & idMask);
+                    if (test != targetParent)
+                    {
+                        // The current idMask is in a different orthogonal component than the target state
+                        // and can therefore be added without problems
+                        AddSubStatesRecSimple(config, initialStates, idMask);
+                    }
+                    else
+                    {
+                        // The current idMask is in the same orthogonal component
+                        // We can add the current component without checking, but need to check in recursive function calls
+                        AddSubStatesRec(config, initialStates, idMask, targetIdMask, (layerMask << 4) + 15);
+                    }
+                }
+                else
+                {
+                    // Check if the targetIdMask is the current layer
+
+                    int test = targetIdMask & layerMask;
+                    if (test == targetIdMask)
+                    {
+                        // If yes, we simply add targetId
+                        AddSubStatesRecSimple(config, initialStates, targetIdMask);
+                    }
+                    else
+                    {
+                        // If no, we are still in a higher layer than targetIdMask
+                        if ((targetIdMask & layerMask) == (idMask & layerMask))
+                        {
+                            // In this case, idMask is a parent of targetIdMask and we can add it
+                            AddSubStatesRec(config, initialStates, idMask, targetIdMask, (layerMask << 4) + 15);
+                        }
+                        else
+                        {
+                            // In this case, our idMask is not a parent, so we need to add the parent
+                            AddSubStatesRec(config, initialStates, (targetIdMask & layerMask), targetIdMask,
+                                (layerMask << 4) + 15);
+                        }
+                    }
+                }
                 
                 // Test for same parent
                 //int layer = FindLayer(targetIdMask);
 
                 //int currentMask = (-1) - (15 << layer);
+                /*
                 int currentMask = parentIdMask;
                 int parent = (currentMask & targetIdMask);
                 int currentParent = (idMask & currentMask);
@@ -788,10 +846,11 @@ namespace StateCharts
                 {
                     AddSubStatesRec(config, initialStates, idMask, targetIdMask, parentIdMask);
                 }
+                */
             }
         }
         
-        void AddSubStatesRecSimple(List<int> config, int targetSystemIdMask, Dictionary<int, int[]> initialStates)
+        void AddSubStatesRecSimple(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask)
         {
             config.Add(targetSystemIdMask);
 
@@ -808,25 +867,10 @@ namespace StateCharts
             {
                 int idMask = states[i];
 
-                AddSubStatesRecSimple(config, idMask, initialStates);
+                AddSubStatesRecSimple(config, initialStates, idMask);
             }
         }
 
-        int FindLayer(int mask)
-        {
-            int layer;
-            for (layer = 1; layer < 8; layer++)
-            {
-                int intermediate = (mask & (15 * 16 * layer));
-                if (intermediate == 0)
-                {
-                    break;
-                }
-            }
-
-            return layer - 1;
-        }
-        
         /*void RemoveIt(List<int> currentStateIds, Specification currentSpec, State sourceSystem)
         {
             for (int i = currentStateIds.Count - 1 ; i >= 0; i--)
@@ -845,7 +889,6 @@ namespace StateCharts
         /// </summary>
         public void ExecuteStepAll()
         {
-            // Space Complexity
             for (int i = 0; i < instances.Length; i++)
             {
                 ExecuteStep(i);
@@ -857,8 +900,6 @@ namespace StateCharts
         /// </summary>
         public void ExecuteStepAllParallel()
         {
-            // Parallel? Im not sure if the memory thing works for parallel execution.
-            // Just test it i guess.
             throw new NotImplementedException();
         }
 
@@ -879,8 +920,10 @@ namespace StateCharts
         /// <exception cref="NotImplementedException"></exception>
         public int CreateSpecification(string json)
         {
-            return CreateTest4(json);
+            return CreateTest1(json);
         }
+        
+        #region Lazy test implementations
         
         private int CreateTest1(string json)
         {
@@ -964,6 +1007,7 @@ namespace StateCharts
 
             Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
             {
+                [0] = new[] {AB.IdMask},
                 [AB.IdMask] = new[] {A.IdMask}, [Y.IdMask] = new[] {Y1.IdMask, Y2.IdMask}, [Y1.IdMask] = new[] {C.IdMask}, [Y2.IdMask] = new[] {F.IdMask}
             };
 
@@ -1206,6 +1250,96 @@ namespace StateCharts
             specifications.Add(size, specification);
             return size;
         }
+
+        private int CreateTest5(string json)
+        {
+            //throw new NotImplementedException();
+
+            #region States
+
+            int X = 1;
+            int A = X + 1 * 16;
+            int A1 = A + 1 * 16 * 16;
+            int A2 = A + 2 * 16 * 16;
+            int B = X + 2 * 16;
+            int B1 = B + 1 * 16 * 16;
+            int B2 = B + 2 * 16 * 16;
+            int C = B2 + 1 * 16 * 16 * 16;
+            int B3 = B + 3 * 16 * 16;
+            
+            int Y = 2;
+            int D = Y + 1 * 16;
+            int D1 = D + 1 * 16 * 16;
+            int D2 = D1 + 1 * 16 * 16 * 16;
+            int E = Y + 2 * 16;
+            int E1 = E + 1 * 16 * 16;
+            int E2 = E + 2 * 16 * 16;
+            int F = E2 + 1 * 16 * 16 * 16;
+            int F1 = F + 1 * 16 * 16 * 16 * 16;
+            int F2 = F1 + 1 * 16 * 16 * 16 * 16;
+            int G = E2 + 2 * 16 * 16 * 16;
+            
+            #endregion
+            
+            #region Transitions & Conditions
+
+            int[] sourceIds = {B1, C};
+            int[] targetIds = {B2, D2};
+            
+            // BoolTrue
+            Condition cAB = new Condition(1, 0);
+            // BoolFalse
+            Condition cBY = new Condition(2, 1);
+
+            Condition[][] conditions =
+            {
+                new [] {cAB, cBY},
+                new [] {cBY},
+                new [] {cBY},
+            };
+
+            TransitionCollection transitions = new TransitionCollection(sourceIds, targetIds, conditions);
+
+            #endregion
+            
+            
+            #region Specification
+
+            Specification specification = new Specification();
+
+            Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
+            {
+                [0] = new[] {X},
+                
+                [X] = new[] {A, B}, 
+                [A] = new[] {A1}, 
+                [B] = new[] {B1},
+                [B2] = new[] {C},
+                
+                [Y] = new[] {D, E},
+                [D] = new[] {D1},
+                [D1] = new[] {D2},
+
+                [E] = new[] {E1},
+                [E2] = new[] {F, G},
+                [F] = new[] {F1},
+            };
+
+            specification.States = new StateCollection(initialStates);
+
+            specification.Transitions = transitions;
+
+            specification.Bools.Add(0, true);
+            specification.Bools.Add(1, false);
+
+            #endregion
+            
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            return size;
+        }
+        
+        #endregion
         
         /// <summary>
         /// Creates an Instance of a given specification ID.
@@ -1239,7 +1373,7 @@ namespace StateCharts
 
             int initial = specifications[specificationId].States.InitialStates[0][0];
             {
-                AddSubStatesRecSimple(instance.Config, initial, specifications[specificationId].States.InitialStates);
+                AddSubStatesRecSimple(instance.Config, specifications[specificationId].States.InitialStates, initial);
             }
 
             Instance[] newInstances = new Instance[instances.Length + 1];
@@ -1258,7 +1392,7 @@ namespace StateCharts
 
         /// <summary>
         /// Tricky because we want everything to be in one place in memory.
-        /// We dont want a lag spike when someone dies.
+        /// We dont want a lag spike when something dies for example.
         /// For now it doesnt matter. Important is the Step-Function. Stuff like this could be in the "Future work" Section
         /// Removes instance
         /// </summary>
@@ -1273,9 +1407,9 @@ namespace StateCharts
         /// Sets a internal Condition/Event
         /// </summary>
         /// <param name="instanceId">ID of the instance that the condition is supposed to be set</param>
-        /// <param name="name">name of the condition that is supposed to be set</param>
+        /// <param name="key">key of the condition that is supposed to be set</param>
         /// <param name="value">value of the condition variable</param>
-        public void SetInstanceCondition(int instanceId, string name, bool value)
+        public void SetInstanceCondition(int instanceId, int key, bool value)
         {
             // Probably needs to be split into different types (bool, int, float, trigger)
             // Equivalent to Unity-Animator variables
