@@ -879,6 +879,11 @@ namespace StateCharts
         /// <exception cref="NotImplementedException"></exception>
         public int CreateSpecification(string json)
         {
+            return CreateTest4(json);
+        }
+        
+        private int CreateTest1(string json)
+        {
             //throw new NotImplementedException();
 
             #region States
@@ -909,7 +914,7 @@ namespace StateCharts
             //Transition GtoAB = new Transition(G.IdMask, AB.IdMask, 4);
 
             int[] sourceIds = {A.IdMask, B.IdMask, C.IdMask, D.IdMask, G.IdMask, F.IdMask };
-            int[] targetIds = {B.IdMask, D.IdMask, D.IdMask, E.IdMask, AB.IdMask, G.IdMask };
+            int[] targetIds = {B.IdMask, Y.IdMask, D.IdMask, E.IdMask, AB.IdMask, G.IdMask };
             
             
             #endregion
@@ -954,7 +959,7 @@ namespace StateCharts
             Specification specification = new Specification();
             //specification.InitialStates[-1] = new List<int>() {AB.IdMask};
 
-            int[] idMasks = { AB.IdMask, A.IdMask, B.IdMask, Y.IdMask, Y1.IdMask, Y2.IdMask, C.IdMask, D.IdMask, E.IdMask, F.IdMask, G.IdMask };
+            //int[] idMasks = { AB.IdMask, A.IdMask, B.IdMask, Y.IdMask, Y1.IdMask, Y2.IdMask, C.IdMask, D.IdMask, E.IdMask, F.IdMask, G.IdMask };
             //int[] initialMasks = { AB.IdMask, Y.IdMask, Y.IdMask };
 
             Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
@@ -962,7 +967,7 @@ namespace StateCharts
                 [AB.IdMask] = new[] {A.IdMask}, [Y.IdMask] = new[] {Y1.IdMask, Y2.IdMask}, [Y1.IdMask] = new[] {C.IdMask}, [Y2.IdMask] = new[] {F.IdMask}
             };
 
-            specification.States = new StateCollection(idMasks, initialStates);
+            specification.States = new StateCollection(initialStates);
 
             //specification.States.Add(AB.IdMask, AB);
             //specification.States.Add(A.IdMask, A);
@@ -1006,6 +1011,202 @@ namespace StateCharts
             return size;
         }
 
+        private int CreateTest2(string json)
+        {
+            //throw new NotImplementedException();
+
+            #region States
+
+            int A = 1;
+            int B = 2;
+            int B2 = B + 1 * 16;
+            int B3 = B2 + 1 * 16 * 16;
+            int B4 = B3 + 1 * 16 * 16 * 16;
+            int B5 = B4 + 1 * 16 * 16 * 16 * 16;
+            int B6 = B5 + 1 * 16 * 16 * 16 * 16 * 16;
+            int B7 = B6 + 1 * 16 * 16 * 16 * 16 * 16 * 16;
+            int B8 = B7 + 1 * 16 * 16 * 16 * 16 * 16 * 16 * 16;
+            int B9 = B7 + 2 * 16 * 16 * 16 * 16 * 16 * 16 * 16;
+            
+            #endregion
+            
+            #region Transitions & Conditions
+
+            int[] sourceIds = {A, B9};
+            int[] targetIds = {B9, A};
+            
+            // BoolTrue
+            Condition cAB = new Condition(1, 0);
+            // BoolFalse
+            Condition cBY = new Condition(2, 1);
+
+            Condition[][] conditions =
+            {
+                new [] {cAB},
+                new [] {cBY},
+            };
+
+            TransitionCollection transitions = new TransitionCollection(sourceIds, targetIds, conditions);
+
+            #endregion
+            
+            
+            #region Specification
+
+            Specification specification = new Specification();
+
+            Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
+            {
+                [0] = new[] {A}, [B] = new[] {B2}, [B2] = new[] {B3}, [B3] = new[] {B4}, [B4] = new[] {B5}, [B5] = new[] {B6}, [B6] = new[] {B7}, [B7] = new[] {B8} 
+            };
+
+            specification.States = new StateCollection(initialStates);
+
+            specification.Transitions = transitions;
+
+            specification.Bools.Add(0, true);
+            specification.Bools.Add(1, false);
+
+            #endregion
+
+            // how do i get a random key?
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            return size;
+        }
+        
+        private int CreateTest3(string json)
+        {
+            //throw new NotImplementedException();
+
+            #region States
+
+            int A = 1;
+            int B = 2;
+            int B2 = B + 1 * 16;
+            int B3 = B2 + 1 * 16 * 16;
+            int B4 = B3 + 1 * 16 * 16 * 16;
+            int B5 = B4 + 1 * 16 * 16 * 16 * 16;
+            int B6 = B5 + 1 * 16 * 16 * 16 * 16 * 16;
+            int B7 = B6 + 1 * 16 * 16 * 16 * 16 * 16 * 16;
+            int B8 = B7 + 1 * 16 * 16 * 16 * 16 * 16 * 16 * 16;
+            
+            int C5 = B4 + 2 * 16 * 16 * 16 * 16;
+            int C6 = C5 + 2 * 16 * 16 * 16 * 16 * 16;
+            int C7 = C6 + 2 * 16 * 16 * 16 * 16 * 16 * 16;
+            int C8 = C7 + 2 * 16 * 16 * 16 * 16 * 16 * 16 * 16;
+            
+            #endregion
+            
+            #region Transitions & Conditions
+
+            int[] sourceIds = {A, C6};
+            int[] targetIds = {C5, A};
+            
+            // BoolTrue
+            Condition cAB = new Condition(1, 0);
+            // BoolFalse
+            Condition cBY = new Condition(2, 1);
+
+            Condition[][] conditions =
+            {
+                new [] {cAB},
+                new [] {cBY},
+            };
+
+            TransitionCollection transitions = new TransitionCollection(sourceIds, targetIds, conditions);
+
+            #endregion
+            
+            
+            #region Specification
+
+            Specification specification = new Specification();
+
+            Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
+            {
+                [0] = new[] {A}, [B] = new[] {B2}, [B2] = new[] {B3}, [B3] = new[] {B4}, [B4] = new[] {B5}, [B5] = new[] {B6}, [B6] = new[] {B7}, [B7] = new[] {B8},
+                [C5] = new[] {C6}, [C6] = new[] {C7}, [C7] = new[] {C8},
+            };
+
+            specification.States = new StateCollection(initialStates);
+
+            specification.Transitions = transitions;
+
+            specification.Bools.Add(0, true);
+            specification.Bools.Add(1, false);
+
+            #endregion
+
+            // how do i get a random key?
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            return size;
+        }
+        
+        private int CreateTest4(string json)
+        {
+            //throw new NotImplementedException();
+
+            #region States
+
+            int A = 1;
+            int A2 = A + 1 * 16;
+            int A3 = A2 + 1 * 16 * 16;
+            
+            int B = 2;
+            int B2 = B + 1 * 16;
+            int B3 = B2 + 1 * 16 * 16;
+            int B4 = B3 + 1 * 16 * 16 * 16;
+            
+            #endregion
+            
+            #region Transitions & Conditions
+
+            int[] sourceIds = {A3, B4};
+            int[] targetIds = {B4, A2};
+            
+            // BoolTrue
+            Condition cAB = new Condition(1, 0);
+            // BoolFalse
+            Condition cBY = new Condition(2, 1);
+
+            Condition[][] conditions =
+            {
+                new [] {cAB},
+                new [] {cBY},
+            };
+
+            TransitionCollection transitions = new TransitionCollection(sourceIds, targetIds, conditions);
+
+            #endregion
+            
+            
+            #region Specification
+
+            Specification specification = new Specification();
+
+            Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
+            {
+                [0] = new[] {A}, [B] = new[] {B2}, [B2] = new[] {B3}, [B3] = new[] {B4}, 
+                [A] = new[] {A2}, [A2] = new[] {A3}, 
+            };
+
+            specification.States = new StateCollection(initialStates);
+
+            specification.Transitions = transitions;
+
+            specification.Bools.Add(0, true);
+            specification.Bools.Add(1, false);
+
+            #endregion
+
+            // how do i get a random key?
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            return size;
+        }
+        
         /// <summary>
         /// Creates an Instance of a given specification ID.
         /// </summary>
@@ -1035,9 +1236,11 @@ namespace StateCharts
             {
                 instance.Triggers.Add(key, specifications[specificationId].Triggers[key]);
             }
-            
-            instance.Config.Add(1);
-            instance.Config.Add(1 + 1*16);
+
+            int initial = specifications[specificationId].States.InitialStates[0][0];
+            {
+                AddSubStatesRecSimple(instance.Config, initial, specifications[specificationId].States.InitialStates);
+            }
 
             Instance[] newInstances = new Instance[instances.Length + 1];
             for (int i = 0; i < instances.Length; i++)
