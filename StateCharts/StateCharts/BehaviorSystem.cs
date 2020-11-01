@@ -338,6 +338,7 @@ namespace StateCharts
                         #region Remove states
                         // Bit Mask
                         // We can possibly remove parent state as well then
+                        
                         for (int i = currentStateIds.Count - 1 ; i >= 0; i--)
                         {
                             if ((currentStateIds[i] & sourceSystemIdMask) == sourceSystemIdMask)
@@ -346,6 +347,7 @@ namespace StateCharts
                                 currentStateIds.RemoveAt(i);
                             }
                         }
+                        
                         
                         // State 1 and all children need to be removed from X
                         // Either we find all states or we have the information in the states
