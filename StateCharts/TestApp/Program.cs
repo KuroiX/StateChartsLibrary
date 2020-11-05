@@ -49,4 +49,17 @@ namespace TestApp
             Console.WriteLine("UltraTripleNice");
         }
     }
+
+    interface myInterface
+    {
+        void Test();
+    }
+
+    struct interfaceStruct : myInterface
+    {
+        public void Test()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

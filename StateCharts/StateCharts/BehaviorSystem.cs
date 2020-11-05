@@ -135,7 +135,52 @@ namespace StateCharts
 
                         #region Evaluate condition
                         Condition c = conditions[j];
+
                         
+                        switch (c.Type)
+                        {
+                            case 0:
+                                result &= current.Triggers[c.Key];
+                                break;
+                            case 1:
+                                result &= current.Bools[c.Key];
+                                break;
+                            case 2:
+                                result &= !current.Bools[c.Key];
+                                break;
+                            case 3:
+                                result &= (current.Ints[c.Key] < c.Value);
+                                break;
+                            case 4:
+                                result &= (current.Ints[c.Key] > c.Value);
+                                break;
+                            case 5:
+                                result &= (current.Ints[c.Key] == c.Value);
+                                break;
+                            case 6:
+                                result &= (current.Ints[c.Key] != c.Value);
+                                break;
+                            case 7:
+                                int f = c.Value;
+                                unsafe
+                                {
+                                    result &= (current.Floats[c.Key] < *(float*) &f);
+                                }
+                                break;
+                            case 8:
+                                int g = c.Value;
+                                unsafe
+                                {
+                                    result &= (current.Floats[c.Key] > *(float*) &g);
+                                }
+                                break;
+                            default:
+                                // Error handling
+                                break;
+                        }
+                        
+                        
+                        /*
                         // Triggers
                         if (c.Type == 0)
                         {
@@ -195,7 +240,7 @@ namespace StateCharts
                             // Error handling
                             Console.WriteLine("Something went wrong");
                         }
-                        
+                        */
                         #endregion
                         
                         if (!result) break;
@@ -206,8 +251,8 @@ namespace StateCharts
                     {
                         #region Find closest common relative
 
-                        int sourceIdMask = sourceIds[t];
-                        int targetIdMask = currentSpec.Transitions.TargetIds[t];
+                        int sourceId = sourceIds[t];
+                        int targetId = currentSpec.Transitions.TargetIds[t];
 
                         //int overlapMask = (sourceIdMask & targetIdMask);
 
@@ -229,7 +274,7 @@ namespace StateCharts
                         }
                         */
 
-                        int layerMask = 15;
+                        int transitionMask = 15;
                         //int targetLayer = 15;
                         for (int i = 1; i < 8; i++)
                         {
@@ -246,9 +291,13 @@ namespace StateCharts
                             targetLayer <<= 4;
                             */
                             
-                            if ((targetIdMask & layerMask) == (sourceIdMask & layerMask))
+                            if ((targetId & transitionMask) == (sourceId & transitionMask))
                             {
-                                layerMask = (layerMask << 4) + 15;
+                                transitionMask = (transitionMask << 4) + 15;
+                            }
+                            else
+                            {
+                                break;
                             }
                         }
                         // After this step, the two variables are supposed to look like this:
@@ -275,8 +324,8 @@ namespace StateCharts
 
                         //return layer - 1;
 
-                        int sourceSystemIdMask = sourceIdMask & layerMask;
-                        int targetSystemIdMask = targetIdMask & layerMask;
+                        int sourceSystemIdMask = sourceId & transitionMask;
+                        int targetSystemIdMask = targetId & transitionMask;
                         
                         // Alternative Algorithm to find most common relative
                         // This algorithm needs more information and takes longer overall, but can be used with
@@ -378,10 +427,10 @@ namespace StateCharts
 
                         // For debugging:
                         //string binary = Convert.ToString(currentMask, 2);
-                        //string binary2 = Convert.ToString(layerMask, 2);
+                        //string binary2 = Convert.ToString(transitionMask, 2);
                         
                         
-                        AddSubStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetIdMask, (layerMask << 4) + 15);
+                        AddSubStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetId, (transitionMask << 4) + 15);
 
                         // Not working alternative
                         /*
@@ -758,24 +807,24 @@ namespace StateCharts
             }*/
         }
 
-        void AddSubStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask, int targetIdMask, int layerMask)
+        void AddSubStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemMask, int targetId, int layerMask)
         {
-            if (targetIdMask == targetSystemIdMask)
+            if (targetId == targetSystemMask)
             {
-                AddSubStatesRecSimple(config, initialStates, targetIdMask);
+                AddSubStatesRecSimple(config, initialStates, targetId);
                 return;
             }
             
-            config.Add(targetSystemIdMask);
+            config.Add(targetSystemMask);
 
             // Version 1: Dictionary
-            if (!initialStates.Keys.Contains(targetSystemIdMask))
+            if (!initialStates.ContainsKey(targetSystemMask))
             {
                 return;
             }
 
-            int[] states = initialStates[targetSystemIdMask];
-            int length = initialStates[targetSystemIdMask].Length;
+            int[] states = initialStates[targetSystemMask];
+            int length = initialStates[targetSystemMask].Length;
 
             for (int i = 0; i < length; i++)
             {
@@ -791,7 +840,7 @@ namespace StateCharts
                     // Let's check
                     
                     // We need the currentLayerMask for this
-                    int targetParent = (targetIdMask & layerMask);
+                    int targetParent = (targetId & layerMask);
                     int test = (targetParent & idMask);
                     if (test != targetParent)
                     {
@@ -803,31 +852,31 @@ namespace StateCharts
                     {
                         // The current idMask is in the same orthogonal component
                         // We can add the current component without checking, but need to check in recursive function calls
-                        AddSubStatesRec(config, initialStates, idMask, targetIdMask, (layerMask << 4) + 15);
+                        AddSubStatesRec(config, initialStates, idMask, targetId, (layerMask << 4) + 15);
                     }
                 }
                 else
                 {
                     // Check if the targetIdMask is the current layer
 
-                    int test = targetIdMask & layerMask;
-                    if (test == targetIdMask)
+                    int test = targetId & layerMask;
+                    if (test == targetId)
                     {
                         // If yes, we simply add targetId
-                        AddSubStatesRecSimple(config, initialStates, targetIdMask);
+                        AddSubStatesRecSimple(config, initialStates, targetId);
                     }
                     else
                     {
                         // If no, we are still in a higher layer than targetIdMask
-                        if ((targetIdMask & layerMask) == (idMask & layerMask))
+                        if ((targetId & layerMask) == (idMask & layerMask))
                         {
                             // In this case, idMask is a parent of targetIdMask and we can add it
-                            AddSubStatesRec(config, initialStates, idMask, targetIdMask, (layerMask << 4) + 15);
+                            AddSubStatesRec(config, initialStates, idMask, targetId, (layerMask << 4) + 15);
                         }
                         else
                         {
                             // In this case, our idMask is not a parent, so we need to add the parent
-                            AddSubStatesRec(config, initialStates, (targetIdMask & layerMask), targetIdMask,
+                            AddSubStatesRec(config, initialStates, (targetId & layerMask), targetId,
                                 (layerMask << 4) + 15);
                         }
                     }
@@ -863,7 +912,7 @@ namespace StateCharts
             config.Add(targetSystemIdMask);
 
             // Version 1: Dictionary
-            if (!initialStates.Keys.Contains(targetSystemIdMask))
+            if (!initialStates.ContainsKey(targetSystemIdMask))
             {
                 return;
             }
@@ -928,7 +977,7 @@ namespace StateCharts
         /// <exception cref="NotImplementedException"></exception>
         public int CreateSpecification(string json)
         {
-            return CreateTest1(json);
+            return CreateTest5(json);
         }
         
         #region Lazy test implementations
@@ -954,6 +1003,19 @@ namespace StateCharts
             State E = new State(Y1.IdMask, Y1.Layer +1, Y1.IdMask + 3*16*16, 0);
             State F = new State(Y2.IdMask, Y2.Layer +1, Y2.IdMask + 1*16*16, Y2.IdMask);
             State G = new State(Y2.IdMask, Y2.Layer +1, Y2.IdMask + 2*16*16, 0);
+            
+            List<State> states = new List<State>();
+            states.Add(AB);
+            states.Add(A);
+            states.Add(B);
+            states.Add(Y);
+            states.Add(Y1);
+            states.Add(Y2);
+            states.Add(C);
+            states.Add(D);
+            states.Add(E);
+            states.Add(F);
+            states.Add(G);
             #endregion
             
             #region Transitions
@@ -1012,12 +1074,22 @@ namespace StateCharts
 
             //int[] idMasks = { AB.IdMask, A.IdMask, B.IdMask, Y.IdMask, Y1.IdMask, Y2.IdMask, C.IdMask, D.IdMask, E.IdMask, F.IdMask, G.IdMask };
             //int[] initialMasks = { AB.IdMask, Y.IdMask, Y.IdMask };
+            
+            
 
             Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
             {
                 [0] = new[] {AB.IdMask},
                 [AB.IdMask] = new[] {A.IdMask}, [Y.IdMask] = new[] {Y1.IdMask, Y2.IdMask}, [Y1.IdMask] = new[] {C.IdMask}, [Y2.IdMask] = new[] {F.IdMask}
             };
+
+            /*foreach (State state in states)
+            {
+                if (!initialStates.ContainsKey(state.IdMask))
+                {
+                    initialStates[state.IdMask] = new int[0];
+                }
+            }*/
 
             specification.States = new StateCollection(initialStates);
 
@@ -1291,8 +1363,8 @@ namespace StateCharts
             
             #region Transitions & Conditions
 
-            int[] sourceIds = {B1, C};
-            int[] targetIds = {B2, D2};
+            int[] sourceIds = {B1, B2, B3, D1, A1};
+            int[] targetIds = {B2, B3, F2, X, A2};
             
             // BoolTrue
             Condition cAB = new Condition(1, 0);
@@ -1302,6 +1374,9 @@ namespace StateCharts
             Condition[][] conditions =
             {
                 new [] {cAB, cBY},
+                new [] {cBY},
+                new [] {cBY},
+                new [] {cBY},
                 new [] {cBY},
                 new [] {cBY},
             };
