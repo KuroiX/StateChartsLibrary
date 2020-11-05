@@ -23,22 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e35255bb-efa8-40a5-a899-7ffd8a71d02b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.StateCharts/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StateCharts/BehaviorSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/BehaviorSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Condition.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Condition.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Instance.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/Specification.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/Specification.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/StateBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/StateBehavior.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/bin/Debug/netstandard2.0/StateCharts.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/StateCharts/obj/Debug/netstandard2.0/StateCharts.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.dll" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/bin/Debug/netcoreapp2.1/StateCharts.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/TestApp/obj/Debug/netcoreapp2.1/TestApp.csprojAssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,10 +91,10 @@
         <option value="$PROJECT_DIR$/StateCharts/TransitionCollection.cs" />
         <option value="$PROJECT_DIR$/StateCharts/SpecificationVariables.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Entity.cs" />
-        <option value="$PROJECT_DIR$/StateCharts/BehaviorSystem.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Specification.cs" />
         <option value="$PROJECT_DIR$/StateCharts/Condition.cs" />
         <option value="$PROJECT_DIR$/TestApp/Program.cs" />
+        <option value="$PROJECT_DIR$/StateCharts/BehaviorSystem.cs" />
       </list>
     </option>
   </component>
@@ -208,7 +193,7 @@
       <workItem from="1604580024152" duration="3859000" />
       <workItem from="1604595887078" duration="2906000" />
       <workItem from="1604601962913" duration="1370000" />
-      <workItem from="1604608601242" duration="2426000" />
+      <workItem from="1604608601242" duration="2792000" />
     </task>
     <servers />
   </component>

@@ -77,46 +77,21 @@ namespace StateCharts
         /// <param name="instanceId">The Id of the instance.</param>
         public void ExecuteStep(int instanceId)
         {
-            // Helper, causes overhead but makes code easier to read
             Entity current = Entities[instanceId];
             Specification currentSpec = specifications[current.SpecificationId];
-
             
-            #region Step 1: Snapshot X, C and E
-
-            // This can be made way more performant with value types (int as IDs)
+            #region Copy configuration
+            
             List<int> currentStateIds = new List<int>();
             foreach (int state in current.Config)
             {
                 currentStateIds.Add(state);
             }
             
-            // Possibility: No copy needed if the behavior is executed separately! (Might be more performant)
-            //Dictionary<string, bool> bools = current.Bools.ToDictionary(entry => entry.Key, entry => entry.Value);
-            //Dictionary<string, bool> triggers = current.Triggers.ToDictionary(entry => entry.Key, entry => entry.Value);
-            //Dictionary<string, int> ints = current.Ints.ToDictionary(entry => entry.Key, entry => entry.Value);
-            //Dictionary<string, float> floats = current.Floats.ToDictionary(entry => entry.Key, entry => entry.Value);
-            
-
             #endregion
 
-            /*
-            #region Step 2: Clear Events (triggers)
-
-            // Might has to be moved to the end
-            foreach (string name in current.Triggers.Keys)
-            {
-                current.Triggers[name] = false;
-            }
-
-            #endregion
-            */
-            
             #region Execute maximal subset of non-conflicting transitions by priority
-            
-            // TODO: Test
-            // Iterate twice and then sort or iterate once over sorted transitions
-            
+
             // For each transition with source state in X
             int[] sourceIds = currentSpec.SourceIds;
             for (int t = 0; t < sourceIds.Length; t++) 
@@ -136,7 +111,6 @@ namespace StateCharts
                         #region Evaluate condition
                         Condition c = conditions[j];
 
-                        
                         switch (c.Type)
                         {
                             case 0:
@@ -178,69 +152,7 @@ namespace StateCharts
                                 // Error handling
                                 break;
                         }
-                        
-                        
-                        /*
-                        // Triggers
-                        if (c.Type == 0)
-                        {
-                            result &= current.Triggers[c.Key];
-                        }
-                        // Bool ==
-                        else if (c.Type == 1)
-                        {
-                            result &= current.Bools[c.Key];
-                        }
-                        // Bool !=
-                        else if (c.Type == 2)
-                        {
-                            result &= !current.Bools[c.Key];
-                        }
-                        // Int <
-                        else if (c.Type == 3)
-                        {
-                            result &= (current.Ints[c.Key] < c.Value);
-                        } 
-                        // Int >
-                        else if (c.Type == 4)
-                        {
-                            result &= (current.Ints[c.Key] > c.Value);
-                        }
-                        // Int ==
-                        else if (c.Type == 5)
-                        {
-                            result &= (current.Ints[c.Key] == c.Value);
-                        }
-                        // Int !=
-                        else if (c.Type == 6)
-                        {
-                            result &= (current.Ints[c.Key] != c.Value);
-                        }
-                        // Float <
-                        else if (c.Type == 7)
-                        {
-                            int f = c.Value;
-                            unsafe
-                            {
-                                result &= (current.Floats[c.Key] < *(float*) &f);
-                            }
-                        }
-                        // Float >
-                        else if (c.Type == 8)
-                        {
-                            int f = c.Value;
-                            unsafe
-                            {
-                                result &= (current.Floats[c.Key] > *(float*) &f);
-                            }
-                        }
-                        // Errors
-                        else
-                        {
-                            // Error handling
-                            Console.WriteLine("Something went wrong");
-                        }
-                        */
+
                         #endregion
                         
                         if (!result) break;
@@ -249,48 +161,15 @@ namespace StateCharts
                     // If transition is relevant, update X' accordingly
                     if (result)
                     {
-                        #region Find closest common relative
+                        #region Find closest common relative (transition mask)
 
                         int sourceId = sourceIds[t];
                         int targetId = currentSpec.TargetIds[t];
 
-                        //int overlapMask = (sourceIdMask & targetIdMask);
-
-
-                        /*
-                        for (int i = 1; i <= 8; i++)
-                        {
-                            layerMask = layerMask * 16 + 15;
-
-                            if ((overlapMask & (15 * i * 16)) == 0)
-                            {
-                                // The first i where this is 0, is the first i that does not have any overlap
-                                // which means this is the layer we are searching for
-                                
-                                // Important to understand is: When removing the according idMasks, the current layer
-                                // is the one that should be removed and added
-                                break;
-                            }
-                        }
-                        */
-
                         int transitionMask = 15;
-                        //int targetLayer = 15;
+                        
                         for (int i = 1; i < 8; i++)
                         {
-                            /*
-                            int intermediate = (targetIdMask & (15 << (4 * i)));
-
-                            if (intermediate == 0)
-                            {
-                                // We should be able to break here, because it is the final layer of target state
-                                // which means there should be no further overlap for the other calculation
-                                break;
-                            }
-
-                            targetLayer <<= 4;
-                            */
-                            
                             if ((targetId & transitionMask) == (sourceId & transitionMask))
                             {
                                 transitionMask = (transitionMask << 4) + 15;
@@ -300,93 +179,12 @@ namespace StateCharts
                                 break;
                             }
                         }
-                        // After this step, the two variables are supposed to look like this:
-                        // layerMask is the mask of the layer that is the most common relative of 
-                        // source state and target state
-                        // e.g. like this:
-                        // layerMask =     0000 0000 0000 0000 0000 0000 1111 1111
-                        // targetLayer is the layer of targetIdMask, that has the last information
-                        // we can use this to check against stuff
-                        // targetLayer =   1111 1111 1111 1111 0000 1111 1111 1111
 
-                        //targetLayer -= 1;
-                        //targetLayer >>= 4;
-                        
-                        //int layer;
-                        //for (layer = 1; layer < 8; layer++)
-                        //{
-                        //    int intermediate = (mask & (15 * 16 * layer));
-                        //    if (intermediate == 0)
-                        //    {
-                        //        break;
-                        //    }
-                        //}
-
-                        //return layer - 1;
-
-                        int sourceSystemIdMask = sourceId & transitionMask;
-                        int targetSystemIdMask = targetId & transitionMask;
-                        
-                        // Alternative Algorithm to find most common relative
-                        // This algorithm needs more information and takes longer overall, but can be used with
-                        // varying sizes of state charts
-                        /*
-                        // Same parent/layer?
-                        State sourceState = currentSpec.States[t.SourceId];
-                        State targetState = currentSpec.States[t.TargetId];
-
-                        State sourceSystem = sourceState;
-                        State targetSystem = targetState;
-                        
-                        // Set sourceSystem and targetSystems layer to same layer
-                        if (sourceState.Layer < targetState.Layer)
-                        {
-                            // Find closest relative
-                            
-                            // Check parent layer until parent layer = target layer
-                            // we know in advance how many layers above it is
-
-                            for (int i = 0; i < targetState.Layer - sourceState.Layer; i++)
-                            {
-                                targetSystem = currentSpec.States[targetSystem.ParentStateId];
-                            }
-                        
-                            // Safety check:
-                            if (targetSystem.Layer != sourceSystem.Layer)
-                            {
-                                throw new Exception("Layer is not the same.");
-                            }
-
-                        }
-                        else if (sourceState.Layer > targetState.Layer)
-                        {
-                            for (int i = 0; i < sourceState.Layer - targetState.Layer; i++)
-                            {
-                                sourceSystem = currentSpec.States[sourceSystem.ParentStateId];
-                            }
-                        
-                            // Safety check:
-                            if (targetSystem.Layer != sourceSystem.Layer)
-                            {
-                                throw new Exception("Layer is not the same.");
-                            }
-                        }
-                        
-                        // At this point, we still need to have both systems have the same parent
-                        while (sourceSystem.ParentStateId != targetSystem.ParentStateId)
-                        {
-                            // Find lowest layer with same parent
-                            sourceSystem = currentSpec.States[sourceSystem.ParentStateId];
-                            targetSystem = currentSpec.States[targetSystem.ParentStateId];
-                        }
-                        */
                         #endregion
-                        
-                        #region Update X'
-                    
+
                         #region Remove states
-                        // Bit Mask
-                        // We can possibly remove parent state as well then
+                        
+                        int sourceSystemIdMask = sourceId & transitionMask;
                         
                         for (int i = currentStateIds.Count - 1 ; i >= 0; i--)
                         {
@@ -397,415 +195,37 @@ namespace StateCharts
                             }
                         }
                         
-                        
-                        // State 1 and all children need to be removed from X
-                        // Either we find all states or we have the information in the states
-                        // Having the information seems way easier for the calculation
-                        // But not as easy for the memory
-                        // E.g. recursive
-                        
-                        // Different version of remove "function"
-                        // Works for bigger or more complex state charts, but is way slower (roughly half speed)
-                        /*
-                        List<int> subStates = currentSpec.GetSubStates(sourceSystem.Id);
-                        foreach (int stateId in subStates) 
-                        {
-                            // Behaviors will probably be saved in extra object?
-                            // That way: I only need the ID 
-                            // Also: Data oriented programming
-                            //exitedStates.Add(stateId);
-                            
-                            currentStateIds.Remove(stateId);
-                        }*/
                         #endregion
                         
                         #region Add states
 
-                        //int layer = FindLayer(targetIdMask);
-
-                        //int currentMask = (-1) - targetLayer;
-
                         // For debugging:
-                        //string binary = Convert.ToString(currentMask, 2);
-                        //string binary2 = Convert.ToString(transitionMask, 2);
+                        //string binary = Convert.ToString(transitionMask, 2);
                         
+                        int targetSystemIdMask = targetId & transitionMask;
                         
                         AddStatesRec(currentStateIds, currentSpec.InitialStates, targetSystemIdMask, targetId, transitionMask);
 
-                        // Not working alternative
-                        /*
-                        currentStateIds.Add(targetSystemIdMask);
-
-                        StateCollection states = currentSpec.States;
-                        int[] initialMasks = states.InitialMasks;
-                        for (int i = 0; i < initialMasks.Length; i++) 
-                        {
-                            int initialMask = initialMasks[i];
-                            
-                            // Doesnt work
-                            if ((initialMask & targetSystemIdMask) == targetSystemIdMask)
-                            {
-                                // This means that the state with id stateId is an initial state in the targetSystem
-                                
-                                // TODO:
-                                // Now we need to check if the current state has the same parent as the target state
-                                // If yes, we add target state instead
-                                // We add current state otherwise
-
-
-                                currentStateIds.Add(states.IdMasks[i]);
-                            }
-                        }
-                        */
-
-                        // Recursive alternative
-                        /*
-                        State targetState = currentSpec.States[targetSystemIdMask];
-
-                        // State 2 and all children need to be added to X
-                        foreach (int stateId in currentSpec.GetInitialStates(targetSystemIdMask))
-                        {
-                            //enteredStates.Add(stateId);
-                            
-                            // This if is for the case that we have a transition to a lower level state
-                            // than the common parent state
-                            if (currentSpec.States[stateId].ParentStateId == targetState.ParentStateId)
-                            {
-                                currentStateIds.Add(targetState.IdMask);
-
-                                if (targetState.IsIntermediate)
-                                {
-                                    // TODO: Add transition to I
-                                    // Find transition?? That kinda sucks
-                                    // Maybe intermediate transitions have their transitions set
-                                }
-                            }
-                            else
-                            {
-                                currentStateIds.Add(stateId);
-
-                                if (currentSpec.States[stateId].IsIntermediate)
-                                {
-                                    // TODO: Add transition to I
-                                    // Find transition?? That kinda sucks
-                                }
-                            }
-                        }
-                        */
-
                         #endregion
-
-                        #endregion
+                        
                     }
                 }
             }
 
             #endregion
             
-            /*
-            #region Step 3: Store relevant Transitions in set T
+            #region Clear Events (triggers)
 
-            
-            // Better iterate over states in X?
-            // But then states become bigger memory wise
-            List<Transition> T = new List<Transition>();
-            
-            foreach (Transition t in specifications[current.SpecificationId].Transitions)
+            // Should be moved to the beginning of the function when behavior is executed too
+            foreach (int key in current.Triggers.Keys)
             {
-                // TODO: Check source?
-                if (!current.Config.Contains(t.SourceId)) continue;
-                bool result = true;
-                
-                // Evaluate
-                foreach (Condition c in t.Conditions)
-                {
-                    if (c.Type == 0)
-                    {
-                        // Trigger
-
-                        result &= triggers[c.Name];
-                    } 
-                    else if (c.Type == 1)
-                    {
-                        // Bool
-                        result &= (bools[c.Name] == c.BoolValue);
-
-                    }
-                    else if (c.Type == 2)
-                    {
-                        // Int
-                        if (c.Operation == 0)
-                        {
-                            // ==
-                            result &= (ints[c.Name] == c.IntValue);
-                        }
-                        else if (c.Operation == 1)
-                        {
-                            // !=
-                            result &= (ints[c.Name] != c.IntValue);
-                        }
-                        else if (c.Operation == 2)
-                        {
-                            // <
-                            result &= (ints[c.Name] < c.IntValue);
-                        } 
-                        else if (c.Operation == 3)
-                        {
-                            // >
-                            result &= (ints[c.Name] > c.IntValue);
-                        }
-                        
-                    }
-                    else
-                    {
-                        // Float
-                        if (c.Operation == 0)
-                        {
-                            // <
-                            result &= (floats[c.Name] < c.FloatValue);
-                        } 
-                        else if (c.Operation == 1)
-                        {
-                            // >
-                            result &= (floats[c.Name] > c.FloatValue);
-                        }
-                    }
-
-                    if (!result) break;
-                }
-
-                if (result)
-                {
-                    // Add
-                    T.Add(t);
-                }
+                current.Triggers[key] = false;
             }
-            // Sort can be avoided if transitions are in the right order from the beginning
-            // That way we only have to sort on initialize
-            // Maybe save transitions in an array? 
-            // 1. all in one place
-            // 2. priority is ID
 
             #endregion
-            */
             
-            //List<int> exitedStates = new List<int>();
-            //List<int> enteredStates = new List<int>();
-            //List<int> transitedTransitions = new List<int>();
-
-            /*
-            // Step 4+5: Evaluate t with highest priority
-            while (true)
-            {
-                List<Transition> I = new List<Transition>();
-                
-                // TODO: Idea
-                // Instead of finding all relevant transitions and storing it in T first, we can (maybe)
-                // find a transition and execute it right afterwards
-                // We should be able to do that because the transitions are sorted to begin with
-                // This helps us because 
-                // 1. We don't have to iterate over T twice in a row
-                // 2. There are transitions that get evaluated but fall out right away
-                // because of a higher priority transition
-                
-                // The check needs to be:
-                // 1. Is source in X?
-                // 2. Are conditions/events true?
-                // 3. Is source also in X'?
-                // The third one is to check whether a higher priority transition was already executed
-                
-                // Instead of checking if source is in X and X' every time, we might be able to save the result
-                // and look it up by ID or sth
-                foreach (Transition t in T)
-                {
-                    // Awesome, everything works over IDs and ints
-                    
-                    // This if is important because we might have changed currentStateIds in a previous iteration
-                    if (currentStateIds.Contains(t.SourceId))
-                    {
-                        // Add to transition behavior
-                        //transitedTransitions.Add(t.Id);
-                        
-                        // Same parent/layer?
-                        //Specification currentSpec = specifications[current.SpecificationId];
-                        State sourceState = specifications[current.SpecificationId].States[t.SourceId];
-                        State targetState = specifications[current.SpecificationId].States[t.TargetId];
-
-                        // should all be doable with Ids
-                        State state1;
-                        State state2;
-                        if (sourceState.Layer < targetState.Layer)
-                        {
-                            // Check parent layer until parent layer = target layer
-                            // we know in advance how many layers above it is
-
-                            State iterate = targetState;
-                            for (int i = 0; i < targetState.Layer - sourceState.Layer; i++)
-                            {
-                                iterate = currentSpec.States[iterate.ParentStateId];
-                            }
-                            
-                            // Safety check:
-                            if (iterate.Layer != sourceState.Layer)
-                            {
-                                throw new Exception("Layer is not the same.");
-                            }
-                            else
-                            {
-                                state1 = sourceState;
-                                state2 = iterate;
-                            }
-                        }
-                        else if (sourceState.Layer > targetState.Layer)
-                        {
-                            // Check parent layer until parent layer = target layer
-                            // we know in advance how many layers above it is
-
-                            int sameId = -1;
-                            State iterate = sourceState;
-                            for (int i = 0; i < sourceState.Layer - targetState.Layer; i++)
-                            {
-                                iterate = currentSpec.States[iterate.ParentStateId];
-                            }
-                            
-                            // Safety check:
-                            if (iterate.Layer != sourceState.Layer)
-                            {
-                                throw new Exception("Layer is not the same.");
-                            }
-                            else
-                            {
-                                state1 = iterate;
-                                state2 = targetState;
-                            }
-                        }
-                        else
-                        {
-                            state1 = sourceState;
-                            state2 = targetState;
-                        }
-
-                        while (state1.ParentStateId != state2.ParentStateId)
-                        {
-                            // Find lowest layer with same parent
-                            state1 = currentSpec.States[state1.ParentStateId];
-                            state2 = currentSpec.States[state2.ParentStateId];
-                        }
-                        
-                        // Now we have the highest parent on both sides
-                        
-                        // State 1 and all children need to be removed from X
-                        // Either we find all states or we have the information in the states
-                        // Having the information seems way easier for the calculation
-                        // But not as easy for the memory
-                        // E.g. recursive
-                        foreach (int stateId in state1.GetSubStateIds())
-                        {
-                            // Behaviors will probably be saved in extra object?
-                            // That way: I only need the ID 
-                            // Also: Data oriented programming
-                            //exitedStates.Add(stateId);
-                            
-                            currentStateIds.Remove(stateId);
-                        }
-                        
-                        // State 2 and all children need to be added to X
-                        foreach (int stateId in state2.GetInitialStateIds())
-                        {
-                            //enteredStates.Add(stateId);
-                            
-                            // This if is for the case that we have a transition to a lower level state
-                            // than the common parent state
-                            if (currentSpec.States[stateId].ParentStateId == targetState.ParentStateId)
-                            {
-                                currentStateIds.Add(targetState.Id);
-
-                                if (targetState.IsIntermediate)
-                                {
-                                    // TODO: Add transition to I
-                                    // Find transition?? That kinda sucks
-                                    // Maybe intermediate transitions have their transitions set
-                                }
-                            }
-                            else
-                            {
-                                currentStateIds.Add(stateId);
-                                
-                                if (currentSpec.States[stateId].IsIntermediate)
-                                {
-                                    // TODO: Add transition to I
-                                    // Find transition?? That kinda sucks
-                                }
-                            }
-                            
-                        }
-                        
-                    }
-                    else
-                    {
-                        // Ignore for now
-                        
-                        // remove transition?
-                        // probably not necessary
-                    }
-                }
-
-                // Step 6: Redo 4+5 with I
-                if (I.Count > 0)
-                {
-                    T.Clear();
-
-                    foreach (Transition t in I)
-                    {
-                        T.Add(t);
-                    }
-
-                    I.Clear();
-                    // sort? probably not, because we go by order again from the beginning
-                    // we just have to make sure we actually do that
-                }
-                else
-                {
-                    break;
-                }
-            }
-            */
-            
-            // For the OnUpdates: We need to know if it was in the same state the time step before
-            // so we need to check for this as well.
-            // Or we have a dictionary for each instance that points from state id to enum {entered, updated, exited, (nothing)}
-            
-            // If we execute the behavior while entering or exiting, we only need one bool that says "entered" and then we can iterate
-            // over X' pretty easily
-
-            // Step 7: Replace fullConfiguration with X
-            // This should work because we have a new currentStateIds list for every iteration
             current.Config = currentStateIds;
             Entities[instanceId] = current;
-
-            /*foreach (int i in transitedTransitions)
-            {
-                // Execute
-                
-                // For now, we dont have it because we dont need it to compare to unity animator?
-                ExecuteTransitionBehavior();
-            }
-
-            foreach (int stateId in specifications[instanceId].States.Keys)
-            {
-                if (exitedStates.Contains(stateId))
-                {
-                    ExecuteExitBehavior(instanceId, stateId);
-                } 
-                else if (enteredStates.Contains(stateId))
-                {
-                    ExecuteEnterBehavior(instanceId, stateId);
-                }
-                else
-                {
-                    ExecuteUpdateBehavior(instanceId, stateId);
-                }
-            }*/
         }
 
         void AddStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemMask, int targetId, int layerMask)
@@ -818,8 +238,7 @@ namespace StateCharts
             
             config.Add(targetSystemMask);
             layerMask = (layerMask << 4) + 15;
-
-            // Version 1: Dictionary
+            
             if (!initialStates.ContainsKey(targetSystemMask))
             {
                 return;
@@ -939,8 +358,7 @@ namespace StateCharts
         void AddStatesRecSimple(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask)
         {
             config.Add(targetSystemIdMask);
-
-            // Version 1: Dictionary
+            
             if (!initialStates.ContainsKey(targetSystemIdMask))
             {
                 return;
@@ -953,19 +371,6 @@ namespace StateCharts
                 AddStatesRecSimple(config, initialStates, states[i]);
             }
         }
-
-        /*void RemoveIt(List<int> currentStateIds, Specification currentSpec, State sourceSystem)
-        {
-            for (int i = currentStateIds.Count - 1 ; i >= 0; i--)
-            {
-                State currentState = currentSpec.States[currentStateIds[i]];
-                if ((currentState.IdMask & sourceSystem.IdMask) == sourceSystem.IdMask)
-                {
-                    // Remove
-                    currentStateIds.RemoveAt(i);
-                }
-            }
-        }*/
 
         /// <summary>
         /// Executes step function for all instances. This is the important function.
