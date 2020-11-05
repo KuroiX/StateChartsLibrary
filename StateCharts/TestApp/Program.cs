@@ -28,16 +28,16 @@ namespace TestApp
             
             BehaviorSystem mySystem = new BehaviorSystem();
 
-            int id = mySystem.CreateSpecification("");
+            int id = mySystem.CreateSpecification("5");
             
             
             Console.WriteLine("Nice");
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 mySystem.CreateInstance(id);
             }
-            int instanceId = mySystem.CreateInstance(id);
+            //int instanceId = mySystem.CreateInstance(id);
 
             Console.WriteLine("DoubleNice");
 
@@ -47,19 +47,6 @@ namespace TestApp
             }
 
             Console.WriteLine("UltraTripleNice");
-        }
-    }
-
-    interface myInterface
-    {
-        void Test();
-    }
-
-    struct interfaceStruct : myInterface
-    {
-        public void Test()
-        {
-            throw new NotImplementedException();
         }
     }
 }

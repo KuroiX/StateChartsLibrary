@@ -430,7 +430,7 @@ namespace StateCharts
                         //string binary2 = Convert.ToString(transitionMask, 2);
                         
                         
-                        AddSubStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetId, (transitionMask << 4) + 15);
+                        AddStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetId, transitionMask);
 
                         // Not working alternative
                         /*
@@ -807,15 +807,16 @@ namespace StateCharts
             }*/
         }
 
-        void AddSubStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemMask, int targetId, int layerMask)
+        void AddStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemMask, int targetId, int layerMask)
         {
             if (targetId == targetSystemMask)
             {
-                AddSubStatesRecSimple(config, initialStates, targetId);
+                AddStatesRecSimple(config, initialStates, targetId);
                 return;
             }
             
             config.Add(targetSystemMask);
+            layerMask = (layerMask << 4) + 15;
 
             // Version 1: Dictionary
             if (!initialStates.ContainsKey(targetSystemMask))
@@ -824,9 +825,35 @@ namespace StateCharts
             }
 
             int[] states = initialStates[targetSystemMask];
-            int length = initialStates[targetSystemMask].Length;
 
-            for (int i = 0; i < length; i++)
+            if (states.Length > 1)
+            {
+                for (int i = 0; i < states.Length; i++)
+                {
+                    if ((targetId & layerMask) == (states[i] & layerMask))
+                    {
+                        AddStatesRec(config, initialStates, states[i], targetId, layerMask);
+                    }
+                    else
+                    {
+                        AddStatesRecSimple(config, initialStates, states[i]);
+                    }
+                }
+            }
+            else
+            {
+                if ((targetId & layerMask) == targetId)
+                {
+                    AddStatesRecSimple(config, initialStates, targetId);
+                }
+                else
+                {
+                    AddStatesRec(config, initialStates, (targetId & layerMask), targetId, layerMask);
+                }
+            }
+
+            // Old version and other stuff
+            /*for (int i = 0; i < length; i++)
             {
                 int idMask = states[i];
                 if (length >= 2)
@@ -903,11 +930,12 @@ namespace StateCharts
                 {
                     AddSubStatesRec(config, initialStates, idMask, targetIdMask, parentIdMask);
                 }
+                }
                 */
-            }
+
         }
         
-        void AddSubStatesRecSimple(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask)
+        void AddStatesRecSimple(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask)
         {
             config.Add(targetSystemIdMask);
 
@@ -918,13 +946,10 @@ namespace StateCharts
             }
 
             int[] states = initialStates[targetSystemIdMask];
-            int length = initialStates[targetSystemIdMask].Length;
 
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < states.Length; i++)
             {
-                int idMask = states[i];
-
-                AddSubStatesRecSimple(config, initialStates, idMask);
+                AddStatesRecSimple(config, initialStates, states[i]);
             }
         }
 
@@ -977,12 +1002,37 @@ namespace StateCharts
         /// <exception cref="NotImplementedException"></exception>
         public int CreateSpecification(string json)
         {
-            return CreateTest5(json);
+            switch (json)
+            {
+                case "0":
+                    return CreateTest0();
+                case "1":
+                    return CreateTest1();
+                case "2":
+                    return CreateTest2();
+                case "3":
+                    return CreateTest3();
+                case "4":
+                    return CreateTest4();
+                case "5":
+                    return CreateTest5();
+                default:
+                    return -1;
+            }
         }
         
         #region Lazy test implementations
+
+        private int CreateTest0()
+        {
+            Specification specification = new Specification();
+            
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            return size;
+        }
         
-        private int CreateTest1(string json)
+        private int CreateTest1()
         {
             //throw new NotImplementedException();
 
@@ -1135,7 +1185,7 @@ namespace StateCharts
             return size;
         }
 
-        private int CreateTest2(string json)
+        private int CreateTest2()
         {
             //throw new NotImplementedException();
 
@@ -1199,7 +1249,7 @@ namespace StateCharts
             return size;
         }
         
-        private int CreateTest3(string json)
+        private int CreateTest3()
         {
             //throw new NotImplementedException();
 
@@ -1268,7 +1318,7 @@ namespace StateCharts
             return size;
         }
         
-        private int CreateTest4(string json)
+        private int CreateTest4()
         {
             //throw new NotImplementedException();
 
@@ -1331,7 +1381,7 @@ namespace StateCharts
             return size;
         }
 
-        private int CreateTest5(string json)
+        private int CreateTest5()
         {
             //throw new NotImplementedException();
 
@@ -1454,9 +1504,16 @@ namespace StateCharts
                 instance.Triggers.Add(key, specifications[specificationId].Triggers[key]);
             }
 
-            int initial = specifications[specificationId].States.InitialStates[0][0];
+            try
             {
-                AddSubStatesRecSimple(instance.Config, specifications[specificationId].States.InitialStates, initial);
+                int initial = specifications[specificationId].States.InitialStates[0][0];
+                {
+                    AddStatesRecSimple(instance.Config, specifications[specificationId].States.InitialStates, initial);
+                }
+            }
+            catch
+            {
+                // ignored
             }
 
             Instance[] newInstances = new Instance[Instances.Length + 1];
