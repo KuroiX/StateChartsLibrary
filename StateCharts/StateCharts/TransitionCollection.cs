@@ -1,6 +1,6 @@
 namespace StateCharts
 {
-    public class TransitionCollection
+    public struct TransitionCollection
     {
         public TransitionCollection(int[] sourceIds, int[] targetIds, Condition[][] conditions)
         {

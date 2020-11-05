@@ -20,7 +20,8 @@ namespace StateCharts
         
         // Can be made immutable?
         // Set of states
-        public StateCollection States { get; set; }
+        //public StateCollection States { get; set; }
+        public Dictionary<int, int[]> InitialStates { get; set; }
         //public Dictionary<int, State> States { get; }
         //public Dictionary<int, List<int>> Hierarchy { get; }
 
@@ -70,9 +71,12 @@ namespace StateCharts
         }
         */
         // Set of transitions
-        public TransitionCollection Transitions { get; set; }
+        //public TransitionCollection Transitions { get; set; }
         //public List<Transition> Transitions { get; set; }
         // Set of conditions
+        public int[] SourceIds { get; set; }
+        public int[] TargetIds { get; set; }
+        public Condition[][] Conditions { get; set; }
         
         // Information about the initial state
         

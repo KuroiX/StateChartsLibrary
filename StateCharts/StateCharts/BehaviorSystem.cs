@@ -118,7 +118,7 @@ namespace StateCharts
             // Iterate twice and then sort or iterate once over sorted transitions
             
             // For each transition with source state in X
-            int[] sourceIds = currentSpec.Transitions.SourceIds;
+            int[] sourceIds = currentSpec.SourceIds;
             for (int t = 0; t < sourceIds.Length; t++) 
             {
                 // Check if source state is still part of X'
@@ -126,7 +126,7 @@ namespace StateCharts
                 {
                     bool result = true;
 
-                    Condition[] conditions = currentSpec.Transitions.Conditions[t];
+                    Condition[] conditions = currentSpec.Conditions[t];
                     // Check if conditions/events evaluate to true
                     for (int j = 0; j < conditions.Length; j++)
                     {
@@ -252,7 +252,7 @@ namespace StateCharts
                         #region Find closest common relative
 
                         int sourceId = sourceIds[t];
-                        int targetId = currentSpec.Transitions.TargetIds[t];
+                        int targetId = currentSpec.TargetIds[t];
 
                         //int overlapMask = (sourceIdMask & targetIdMask);
 
@@ -430,7 +430,7 @@ namespace StateCharts
                         //string binary2 = Convert.ToString(transitionMask, 2);
                         
                         
-                        AddStatesRec(currentStateIds, currentSpec.States.InitialStates, targetSystemIdMask, targetId, transitionMask);
+                        AddStatesRec(currentStateIds, currentSpec.InitialStates, targetSystemIdMask, targetId, transitionMask);
 
                         // Not working alternative
                         /*
@@ -1141,7 +1141,7 @@ namespace StateCharts
                 }
             }*/
 
-            specification.States = new StateCollection(initialStates);
+            specification.InitialStates = initialStates;
 
             //specification.States.Add(AB.IdMask, AB);
             //specification.States.Add(A.IdMask, A);
@@ -1161,7 +1161,10 @@ namespace StateCharts
             //specification.Transitions.Add(FtoG);
             //specification.Transitions.Add(GtoAB);
 
-            specification.Transitions = transitions;
+            //specification.Transitions = transitions;
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
 
             specification.Bools.Add(0, true);
             specification.Bools.Add(1, false);
@@ -1234,9 +1237,11 @@ namespace StateCharts
                 [0] = new[] {A}, [B] = new[] {B2}, [B2] = new[] {B3}, [B3] = new[] {B4}, [B4] = new[] {B5}, [B5] = new[] {B6}, [B6] = new[] {B7}, [B7] = new[] {B8} 
             };
 
-            specification.States = new StateCollection(initialStates);
+            specification.InitialStates = initialStates;
 
-            specification.Transitions = transitions;
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
 
             specification.Bools.Add(0, true);
             specification.Bools.Add(1, false);
@@ -1303,9 +1308,11 @@ namespace StateCharts
                 [C5] = new[] {C6}, [C6] = new[] {C7}, [C7] = new[] {C8},
             };
 
-            specification.States = new StateCollection(initialStates);
+            specification.InitialStates = initialStates;
 
-            specification.Transitions = transitions;
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
 
             specification.Bools.Add(0, true);
             specification.Bools.Add(1, false);
@@ -1366,9 +1373,11 @@ namespace StateCharts
                 [A] = new[] {A2}, [A2] = new[] {A3}, 
             };
 
-            specification.States = new StateCollection(initialStates);
+            specification.InitialStates = initialStates;
 
-            specification.Transitions = transitions;
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
 
             specification.Bools.Add(0, true);
             specification.Bools.Add(1, false);
@@ -1458,9 +1467,11 @@ namespace StateCharts
                 [F] = new[] {F1},
             };
 
-            specification.States = new StateCollection(initialStates);
+            specification.InitialStates = initialStates;
 
-            specification.Transitions = transitions;
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
 
             specification.Bools.Add(0, true);
             specification.Bools.Add(1, false);
@@ -1506,9 +1517,9 @@ namespace StateCharts
 
             try
             {
-                int initial = specifications[specificationId].States.InitialStates[0][0];
+                int initial = specifications[specificationId].InitialStates[0][0];
                 {
-                    AddStatesRecSimple(instance.Config, specifications[specificationId].States.InitialStates, initial);
+                    AddStatesRecSimple(instance.Config, specifications[specificationId].InitialStates, initial);
                 }
             }
             catch
