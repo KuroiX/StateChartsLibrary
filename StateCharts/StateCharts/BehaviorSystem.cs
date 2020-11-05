@@ -215,7 +215,7 @@ namespace StateCharts
             #endregion
             
             #region Clear Events (triggers)
-
+            
             // Should be moved to the beginning of the function when behavior is executed too
             foreach (int key in current.Triggers.Keys)
             {
@@ -228,7 +228,7 @@ namespace StateCharts
             Entities[instanceId] = current;
         }
 
-        void AddStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemMask, int targetId, int layerMask)
+        private void AddStatesRec(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemMask, int targetId, int layerMask)
         {
             if (targetId == targetSystemMask)
             {
@@ -355,7 +355,7 @@ namespace StateCharts
 
         }
         
-        void AddStatesRecSimple(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask)
+        private void AddStatesRecSimple(List<int> config, Dictionary<int, int[]> initialStates, int targetSystemIdMask)
         {
             config.Add(targetSystemIdMask);
             
