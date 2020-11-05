@@ -47,7 +47,7 @@
         <e p="BehaviorSystem.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Condition.cs" t="Include" />
-        <e p="Instance.cs" t="Include" />
+        <e p="Entity.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.0" t="Include">
@@ -56,6 +56,7 @@
           </e>
         </e>
         <e p="Specification.cs" t="Include" />
+        <e p="SpecificationVariables.cs" t="Include" />
         <e p="State.cs" t="Include" />
         <e p="StateBehavior.cs" t="Include" />
         <e p="StateCharts.csproj" t="IncludeRecursive" />

@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-
 namespace StateCharts
 {
     public struct Condition
@@ -27,10 +25,7 @@ namespace StateCharts
                 Value = * (int*) &value;
             }
         }
-        
-        // REFERENCE TYPE
-        //public string Name { get; set; }
-        
+
         public int Type { get; }
         public int Key { get; }
         public int Value { get; }

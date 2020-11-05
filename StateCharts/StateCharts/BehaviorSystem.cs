@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading;
 
 namespace StateCharts
 {
@@ -18,20 +15,23 @@ namespace StateCharts
         public BehaviorSystem()
         {
             specifications = new Dictionary<int, Specification>();
-            Instances = new Instance[0];
+            specVariables = new Dictionary<int, SpecificationVariables>();
+            Entities = new Entity[0];
         }
         
         // Specifications
         // Different types of Behaviors: Player, Enemy, Boss, ...
         private Dictionary<int, Specification> specifications;
+        private Dictionary<int, SpecificationVariables> specVariables;
         
         // InstanceArray
         // One instance consists of Configuration, Conditions and Events
-        public Instance[] Instances { get; private set; }
+        public Entity[] Entities { get; private set; }
         
         // Maybe external conditions here?
         
         #region Execute Behavior
+        /*
         private void ExecuteEnterBehavior(int instanceId, int stateId)
         {
             foreach(StateBehavior behavior in specifications[instanceId].Behavior[stateId])
@@ -68,7 +68,7 @@ namespace StateCharts
         {
             
         }
-        
+        */
         #endregion
         
         /// <summary>
@@ -78,7 +78,7 @@ namespace StateCharts
         public void ExecuteStep(int instanceId)
         {
             // Helper, causes overhead but makes code easier to read
-            Instance current = Instances[instanceId];
+            Entity current = Entities[instanceId];
             Specification currentSpec = specifications[current.SpecificationId];
 
             
@@ -781,6 +781,7 @@ namespace StateCharts
             // Step 7: Replace fullConfiguration with X
             // This should work because we have a new currentStateIds list for every iteration
             current.Config = currentStateIds;
+            Entities[instanceId] = current;
 
             /*foreach (int i in transitedTransitions)
             {
@@ -971,7 +972,7 @@ namespace StateCharts
         /// </summary>
         public void ExecuteStepAll()
         {
-            for (int i = 0; i < Instances.Length; i++)
+            for (int i = 0; i < Entities.Length; i++)
             {
                 ExecuteStep(i);
             }
@@ -1166,13 +1167,20 @@ namespace StateCharts
             specification.TargetIds = targetIds;
             specification.Conditions = conditions;
 
-            specification.Bools.Add(0, true);
-            specification.Bools.Add(1, false);
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+            
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
 
-            specification.Ints.Add(2, 0);
-            specification.Ints.Add(3, 0);
-            specification.Ints.Add(4, 0);
-            specification.Ints.Add(5, 0);
+            variables.Ints.Add(2, 0);
+            variables.Ints.Add(3, 0);
+            variables.Ints.Add(4, 0);
+            variables.Ints.Add(5, 0);
 
             //specification.Hierarchy[0] = new List<int> {1, 2};
             //specification.Hierarchy[3] = new List<int> {4, 5, 6, 7, 8};
@@ -1185,6 +1193,7 @@ namespace StateCharts
             // how do i get a random key?
             int size = specifications.Count;
             specifications.Add(size, specification);
+            specVariables.Add(size, variables);
             return size;
         }
 
@@ -1243,14 +1252,22 @@ namespace StateCharts
             specification.TargetIds = targetIds;
             specification.Conditions = conditions;
 
-            specification.Bools.Add(0, true);
-            specification.Bools.Add(1, false);
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+            
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
 
             #endregion
 
             // how do i get a random key?
             int size = specifications.Count;
             specifications.Add(size, specification);
+            specVariables.Add(size, variables);
             return size;
         }
         
@@ -1314,14 +1331,22 @@ namespace StateCharts
             specification.TargetIds = targetIds;
             specification.Conditions = conditions;
 
-            specification.Bools.Add(0, true);
-            specification.Bools.Add(1, false);
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+            
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
 
             #endregion
 
             // how do i get a random key?
             int size = specifications.Count;
             specifications.Add(size, specification);
+            specVariables.Add(size, variables);
             return size;
         }
         
@@ -1379,14 +1404,22 @@ namespace StateCharts
             specification.TargetIds = targetIds;
             specification.Conditions = conditions;
 
-            specification.Bools.Add(0, true);
-            specification.Bools.Add(1, false);
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+            
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
 
             #endregion
 
             // how do i get a random key?
             int size = specifications.Count;
             specifications.Add(size, specification);
+            specVariables.Add(size, variables);
             return size;
         }
 
@@ -1472,14 +1505,22 @@ namespace StateCharts
             specification.SourceIds = sourceIds;
             specification.TargetIds = targetIds;
             specification.Conditions = conditions;
+            
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
 
-            specification.Bools.Add(0, true);
-            specification.Bools.Add(1, false);
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
 
             #endregion
             
             int size = specifications.Count;
             specifications.Add(size, specification);
+            specVariables.Add(size, variables);
             return size;
         }
         
@@ -1493,33 +1534,33 @@ namespace StateCharts
         /// <exception cref="NotImplementedException"></exception>
         public int CreateInstance(int specificationId)
         {
-            Instance instance = new Instance(specificationId);
+            Entity entity = new Entity(specificationId);
 
-            foreach (int key in specifications[specificationId].Bools.Keys)
+            foreach (int key in specVariables[specificationId].Bools.Keys)
             {
-                instance.Bools.Add(key, specifications[specificationId].Bools[key]);
+                entity.Bools.Add(key, specVariables[specificationId].Bools[key]);
             }
 
-            foreach (int key in specifications[specificationId].Ints.Keys)
+            foreach (int key in specVariables[specificationId].Ints.Keys)
             {
-                instance.Ints.Add(key, specifications[specificationId].Ints[key]);
+                entity.Ints.Add(key, specVariables[specificationId].Ints[key]);
             }
 
-            foreach (int key in specifications[specificationId].Floats.Keys)
+            foreach (int key in specVariables[specificationId].Floats.Keys)
             {
-                instance.Floats.Add(key, specifications[specificationId].Floats[key]);
+                entity.Floats.Add(key, specVariables[specificationId].Floats[key]);
             }
 
-            foreach (int key in specifications[specificationId].Triggers.Keys)
+            foreach (int key in specVariables[specificationId].Triggers.Keys)
             {
-                instance.Triggers.Add(key, specifications[specificationId].Triggers[key]);
+                entity.Triggers.Add(key, specVariables[specificationId].Triggers[key]);
             }
 
             try
             {
                 int initial = specifications[specificationId].InitialStates[0][0];
                 {
-                    AddStatesRecSimple(instance.Config, specifications[specificationId].InitialStates, initial);
+                    AddStatesRecSimple(entity.Config, specifications[specificationId].InitialStates, initial);
                 }
             }
             catch
@@ -1527,16 +1568,16 @@ namespace StateCharts
                 // ignored
             }
 
-            Instance[] newInstances = new Instance[Instances.Length + 1];
-            for (int i = 0; i < Instances.Length; i++)
+            Entity[] newInstances = new Entity[Entities.Length + 1];
+            for (int i = 0; i < Entities.Length; i++)
             {
-                newInstances[i] = Instances[i];
+                newInstances[i] = Entities[i];
             }
-            newInstances[Instances.Length] = instance;
+            newInstances[Entities.Length] = entity;
 
-            Instances = newInstances;
+            Entities = newInstances;
 
-            return Instances.Length;
+            return Entities.Length;
 
             //throw new NotImplementedException();
         }
