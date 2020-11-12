@@ -27,20 +27,25 @@ namespace TestApp
             
             BehaviorSystem mySystem = new BehaviorSystem();
 
-            int id = mySystem.CreateSpecification("5");
+            
+            int id = mySystem.CreateSpecification("2");
+            int id2 = mySystem.CreateSpecification("1");
+            int id3 = mySystem.CreateSpecification("0");
             
             
             Console.WriteLine("Nice");
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 3333; i++)
             {
+                mySystem.CreateInstance(id3);
+                mySystem.CreateInstance(id2);
                 mySystem.CreateInstance(id);
             }
             //int instanceId = mySystem.CreateInstance(id);
 
             Console.WriteLine("DoubleNice");
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 10000; i++)
             {
                 mySystem.ExecuteStepAll();
             }

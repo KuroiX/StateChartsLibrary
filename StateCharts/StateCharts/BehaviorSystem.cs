@@ -433,12 +433,26 @@ namespace StateCharts
         {
             Specification specification = new Specification();
             
+            specification.InitialStates = new Dictionary<int, int[]>();
+
+            specification.SourceIds = new int[0];
+            specification.TargetIds = new int[0];
+            specification.Conditions = new Condition[0][];
+            
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+            
             int size = specifications.Count;
             specifications.Add(size, specification);
+            specVariables.Add(size, variables);
             return size;
         }
         
-        private int CreateTest1()
+        private int CreateTest12()
         {
             //throw new NotImplementedException();
 
@@ -601,8 +615,224 @@ namespace StateCharts
             specVariables.Add(size, variables);
             return size;
         }
+        
+        private int CreateTest1()
+        {
+            //throw new NotImplementedException();
+
+            #region States
+
+            int a = 1;
+            int b = 2;
+            int c = 3;
+            int d = 4;
+            
+            #endregion
+            
+            #region Transitions
+            //Transition AtoB = new Transition(A.IdMask, B.IdMask, 0);
+            //Transition BtoY = new Transition(B.IdMask, Y.IdMask, 1);
+            //Transition CtoD = new Transition(C.IdMask, D.IdMask, 2);
+            //Transition DtoE = new Transition(D.IdMask, E.IdMask, 3);
+            //Transition FtoG = new Transition(F.IdMask, G.IdMask, 5);
+            //Transition GtoAB = new Transition(G.IdMask, AB.IdMask, 4);
+
+            int[] sourceIds = {a, b, c, d };
+            int[] targetIds = {b, c, d, a };
+            
+            
+            #endregion
+            
+            #region Conditions
+            // BoolTrue
+            Condition cAB = new Condition(1, 0);
+
+            Condition[][] conditions =
+            {
+                new [] {cAB},
+                new [] {cAB},
+                new [] {cAB},
+                new [] {cAB},
+            };
+
+            //AtoB.Conditions.Add(cAB);
+            //BtoY.Conditions.Add(cBY);
+            //CtoD.Conditions.Add(cCD);
+            //DtoE.Conditions.Add(cDE);
+            //GtoAB.Conditions.Add(cGAB);
+            //FtoG.Conditions.Add(cFG);
+            
+            TransitionCollection transitions = new TransitionCollection(sourceIds, targetIds, conditions);
+
+            #endregion
+            
+            #region Specification
+
+            Specification specification = new Specification();
+            //specification.InitialStates[-1] = new List<int>() {AB.IdMask};
+
+            //int[] idMasks = { AB.IdMask, A.IdMask, B.IdMask, Y.IdMask, Y1.IdMask, Y2.IdMask, C.IdMask, D.IdMask, E.IdMask, F.IdMask, G.IdMask };
+            //int[] initialMasks = { AB.IdMask, Y.IdMask, Y.IdMask };
+            
+            
+
+            Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
+            {
+                [0] = new[] {a},
+            };
+
+            /*foreach (State state in states)
+            {
+                if (!initialStates.ContainsKey(state.IdMask))
+                {
+                    initialStates[state.IdMask] = new int[0];
+                }
+            }*/
+
+            specification.InitialStates = initialStates;
+
+            //specification.States.Add(AB.IdMask, AB);
+            //specification.States.Add(A.IdMask, A);
+            //specification.States.Add(B.IdMask, B);
+            
+            //specification.States.Add(Y.IdMask, Y);
+            //specification.States.Add(C.IdMask, C);
+            //specification.States.Add(D.IdMask, D);
+            //specification.States.Add(E.IdMask, E);
+            //specification.States.Add(F.IdMask, F);
+            //specification.States.Add(G.IdMask, G);
+            
+            //specification.Transitions.Add(AtoB);
+            //specification.Transitions.Add(BtoY);
+            //specification.Transitions.Add(CtoD);
+            //specification.Transitions.Add(DtoE);
+            //specification.Transitions.Add(FtoG);
+            //specification.Transitions.Add(GtoAB);
+
+            //specification.Transitions = transitions;
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
+
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+            
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
+
+            variables.Ints.Add(2, 0);
+            variables.Ints.Add(3, 0);
+            variables.Ints.Add(4, 0);
+            variables.Ints.Add(5, 0);
+
+            //specification.Hierarchy[0] = new List<int> {1, 2};
+            //specification.Hierarchy[3] = new List<int> {4, 5, 6, 7, 8};
+
+            //specification.InitialStates[1] = new List<int> {1+1*16};
+            //specification.InitialStates[2] = new List<int> {2+1*16, 2+4*16};
+
+            #endregion
+
+            // how do i get a random key?
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            specVariables.Add(size, variables);
+            return size;
+        }
 
         private int CreateTest2()
+        {
+            #region States
+
+            int X = 1;
+            int X1 = X + 1 * 16;
+            int X11 = X1 + 1 * 16 * 16;
+            int X111 = X11 + 1 * 16 * 16 * 16;
+            
+            int X2 = X + 2 * 16;
+            int X21 = X2 + 1 * 16 * 16;
+            int X211 = X21 + 1 * 16 * 16 * 16;
+            
+            int Y = 2;
+            int Y1 = Y + 1 * 16;
+            int Y11 = Y1 + 1 * 16 * 16;
+            int Y111 = Y11 + 1 * 16 * 16 * 16;
+            
+            int Y2 = Y + 2 * 16;
+            int Y21 = Y2 + 1 * 16 * 16;
+            int Y211 = Y21 + 1 * 16 * 16 * 16;
+            
+            #endregion
+            
+            #region Transitions & Conditions
+
+            int[] sourceIds = {X211, Y111};
+            int[] targetIds = {Y111, X211};
+            
+            // BoolTrue
+            Condition cAB = new Condition(1, 0);
+
+            Condition[][] conditions =
+            {
+                new [] {cAB},
+                new [] {cAB},
+            };
+
+            TransitionCollection transitions = new TransitionCollection(sourceIds, targetIds, conditions);
+
+            #endregion
+            
+            
+            #region Specification
+
+            Specification specification = new Specification();
+
+            Dictionary<int, int[]> initialStates = new Dictionary<int, int[]>
+            {
+                [0] = new[] {X},
+                
+                [X] = new[] {X1, X2}, 
+                [X1] = new[] {X11}, 
+                [X11] = new[] {X111}, 
+                [X2] = new[] {X21}, 
+                [X21] = new[] {X211},
+
+                [Y] = new[] {Y1, Y2}, 
+                [Y1] = new[] {Y11}, 
+                [Y11] = new[] {Y111}, 
+                [Y2] = new[] {Y21}, 
+                [Y21] = new[] {Y211},
+            };
+
+            specification.InitialStates = initialStates;
+
+            specification.SourceIds = sourceIds;
+            specification.TargetIds = targetIds;
+            specification.Conditions = conditions;
+            
+            SpecificationVariables variables = new SpecificationVariables();
+            
+            variables.Bools = new Dictionary<int, bool>();
+            variables.Ints = new Dictionary<int, int>();
+            variables.Floats = new Dictionary<int, float>();
+            variables.Triggers = new Dictionary<int, bool>();
+
+            variables.Bools.Add(0, true);
+            variables.Bools.Add(1, false);
+
+            #endregion
+            
+            int size = specifications.Count;
+            specifications.Add(size, specification);
+            specVariables.Add(size, variables);
+            return size;
+        }
+
+        private int CreateTest22()
         {
             //throw new NotImplementedException();
 
@@ -860,8 +1090,8 @@ namespace StateCharts
             
             #region Transitions & Conditions
 
-            int[] sourceIds = {B1, B2, B3, D1, A1};
-            int[] targetIds = {B2, B3, F2, X, A2};
+            int[] sourceIds = {B1, B2, F2, A1, A2};
+            int[] targetIds = {B2, F2, B2, A2, A1};
             
             // BoolTrue
             Condition cAB = new Condition(1, 0);
@@ -871,7 +1101,6 @@ namespace StateCharts
             Condition[][] conditions =
             {
                 new [] {cAB, cBY},
-                new [] {cBY},
                 new [] {cBY},
                 new [] {cBY},
                 new [] {cBY},
